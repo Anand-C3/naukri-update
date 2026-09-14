@@ -210,11 +210,18 @@ async function googleLogin(ctx, page) {
     launchOptions.channel = "chrome";
   }
   const storagePath = path.join(__dirname, "storageState.json");
-  if (fs.existsSync(storagePath)) {
-    launchOptions.storageState = storagePath;
-  }
+  let ctx, browser;
 
-  const ctx = await chromium.launchPersistentContext(PROFILE_DIR, launchOptions);
+  if (isCI) {
+    browser = await chromium.launch(launchOptions);
+    ctx = await browser.newContext({
+      viewport: { width: 1280, height: 850 },
+      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
+      storageState: fs.existsSync(storagePath) ? storagePath : undefined,
+    });
+  } else {
+    ctx = await chromium.launchPersistentContext(PROFILE_DIR, launchOptions);
+  }
 
   if (fs.existsSync(storagePath)) {
     try {
@@ -227,17 +234,8 @@ async function googleLogin(ctx, page) {
     }
   }
 
-  // Hidden rather than parked at -32000,-32000: off-screen made the taskbar button
-  // useless, because "restoring" put the window back where no monitor reaches.
-  // Pass --show to keep it on screen, --minimize to leave it in the taskbar.
-  //
-  // Swept on a timer, not hidden once: Chrome can take longer than a single delay to
-  // put its window up, and the Google sign-in opens a further window part-way through
-  // a run — either of those would otherwise sit visible for the rest of the run.
-  // Paused while show-windows.js has set its flag, so it never fights a window you
-  // deliberately brought up.
   let hideTimer = null;
-  if (!LOGIN_MODE && !SHOW_WINDOW) {
+  if (!LOGIN_MODE && !SHOW_WINDOW && !isCI) {
     const stow = MINIMIZE_ONLY ? minimizeBrowserWindows : hideBrowserWindows;
     const sweep = () => {
       if (fs.existsSync(SHOW_FLAG)) return;
@@ -245,22 +243,27 @@ async function googleLogin(ctx, page) {
     };
     setTimeout(sweep, 1200);
     hideTimer = setInterval(sweep, 3000);
-    hideTimer.unref?.(); // never hold the process open on this alone
+    hideTimer.unref?.();
     ctx.once("close", () => clearInterval(hideTimer));
   }
   let page = ctx.pages()[0] || (await ctx.newPage());
 
   try {
+    log(`Navigating to ${PROFILE_URL}...`);
     await page.goto(PROFILE_URL, {
       waitUntil: "domcontentloaded",
       timeout: 60000,
     });
+    await page.waitForTimeout(3000);
+    log(`Current URL: ${page.url()} | Title: ${await page.title()}`);
 
     // Dismiss any promotional drawer / popup
     await page.locator('.crossIcon, button:has-text("Later"), [class*="close-icon"], .drawer-close').first().click({ timeout: 2000 }).catch(() => {});
 
     if (!onProfile(new URL(page.url()))) {
+      log(`Redirected to ${page.url()} — attempting login...`);
       page = await loginNaukri(ctx, page);
+      log(`Post-login URL: ${page.url()}`);
     }
     // login may land on /mnjuser/homepage — make sure we're on the profile itself
     if (!/\/mnjuser\/profile/.test(page.url())) {
