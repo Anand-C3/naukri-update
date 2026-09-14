@@ -1,4 +1,4 @@
-﻿const { chromium } = require('playwright-core');
+const { chromium } = require('playwright-core');
 const fs = require('fs');
 const path = require('path');
 
@@ -272,10 +272,11 @@ async function generateExactPDF() {
   fs.writeFileSync(tempHtml, htmlContent, 'utf8');
 
   console.log('Generating exact PDF from resume layout...');
-  const browser = await chromium.launch({
-    channel: 'chrome',
-    headless: true
-  });
+  const launchOptions = { headless: true };
+  if (process.platform === 'win32') {
+    launchOptions.channel = 'chrome';
+  }
+  const browser = await chromium.launch(launchOptions);
   const context = await browser.newContext();
   const page = await context.newPage();
 

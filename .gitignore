@@ -13,6 +13,7 @@ apply-state-*.json
 
 # resume / personal docs
 *.pdf
+!Resume.pdf
 
 # machine-specific launchers (contain absolute local paths)
 *.vbs
