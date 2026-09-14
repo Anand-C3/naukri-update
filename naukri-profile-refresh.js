@@ -52,14 +52,50 @@ const log = (msg) => {
   fs.appendFileSync(LOG_FILE, line + "\n");
 };
 
-const onProfile = (url) => url.pathname.startsWith("/mnjuser");
+const onProfile = (url) => url.pathname && url.pathname.startsWith("/mnjuser");
 
-async function googleLogin(ctx, page) {
-  log("Session gone — signing in with Google...");
+async function loginNaukri(ctx, page) {
+  log("Session expired/unauthorized — logging in to Naukri...");
   await page.goto(LOGIN_URL, {
     waitUntil: "domcontentloaded",
     timeout: 60000,
   });
+
+  const usernameInput = page
+    .locator('#usernameField, input[placeholder*="Email"], input[type="text"]')
+    .first();
+  const passwordInput = page.locator('#passwordField, input[type="password"]').first();
+  const loginBtn = page
+    .locator('button[type="submit"]:has-text("Login"), button.loginButton, [class*="loginButton"]')
+    .first();
+
+  const userEmail = process.env.NAUKRI_EMAIL || CREDS.email;
+  const userPassword = process.env.NAUKRI_PASSWORD || CREDS.password;
+
+  if (userPassword && (await usernameInput.isVisible({ timeout: 5000 }).catch(() => false))) {
+    log("Attempting direct email/password login...");
+    await usernameInput.fill(userEmail);
+    await passwordInput.fill(userPassword);
+    await loginBtn.click();
+
+    await page.waitForTimeout(5000);
+    if (onProfile(new URL(page.url())) || /\/mnjuser\//.test(page.url())) {
+      log("Direct login OK, session active.");
+      return page;
+    }
+  }
+
+  return await googleLogin(ctx, page);
+}
+
+async function googleLogin(ctx, page) {
+  log("Signing in with Google...");
+  if (!page.url().includes("nlogin")) {
+    await page.goto(LOGIN_URL, {
+      waitUntil: "domcontentloaded",
+      timeout: 60000,
+    });
+  }
 
   // Naukri's "Sign in with Google" is a plain div.socialbtn.google
   const googleBtn = page
@@ -224,7 +260,7 @@ async function googleLogin(ctx, page) {
     await page.locator('.crossIcon, button:has-text("Later"), [class*="close-icon"], .drawer-close').first().click({ timeout: 2000 }).catch(() => {});
 
     if (!onProfile(new URL(page.url()))) {
-      page = await googleLogin(ctx, page);
+      page = await loginNaukri(ctx, page);
     }
     // login may land on /mnjuser/homepage — make sure we're on the profile itself
     if (!/\/mnjuser\/profile/.test(page.url())) {
