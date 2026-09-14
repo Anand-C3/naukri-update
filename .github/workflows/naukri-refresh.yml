@@ -1,0 +1,36 @@
+name: 24/7 Naukri Profile Refresh
+
+on:
+  schedule:
+    # Runs automatically every 10 minutes, 24 hours a day
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub web UI
+
+jobs:
+  refresh-profile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          npx playwright install chromium --with-deps
+
+      - name: Build Resume PDF
+        run: node build-resume-exact.js
+
+      - name: Run Naukri Profile Refresh
+        env:
+          NAUKRI_SESSION_B64: ${{ secrets.NAUKRI_SESSION_B64 }}
+          CI: true
+        run: |
+          xvfb-run --auto-servernum --server-args="-screen 0 1280x900x24" node naukri-profile-refresh.js

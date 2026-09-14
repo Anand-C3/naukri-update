@@ -1,19 +1,12 @@
-# Registers the three hourly automation tasks in Windows Task Scheduler.
+# Registers automation tasks in Windows Task Scheduler.
 #
-#   Register:  powershell -ExecutionPolicy Bypass -File setup-schedule.ps1
+#   Register:  powershell -ExecutionPolicy Bypass -File setup-schedule.ps1 -IntervalMinutes 10
 #   Status:    powershell -ExecutionPolicy Bypass -File setup-schedule.ps1 -Status
 #   Remove:    powershell -ExecutionPolicy Bypass -File setup-schedule.ps1 -Remove
 #
 # No admin rights needed: these run as you, in your own session.
-#
-# Why "at logon" rather than "at startup": Chrome cannot run headless here (Naukri's
-# Akamai bot-check blocks headless browsers), so every run needs a real desktop
-# session to draw into. A boot trigger would fire before one exists.
-#
-# Nothing appears on screen: Task Scheduler launches wscript.exe, which starts node
-# with no console window, and the browser itself launches off-screen and hidden.
 
-param([switch]$Remove, [switch]$Status)
+param([int]$IntervalMinutes = 10, [switch]$Remove, [switch]$Status)
 
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -22,7 +15,7 @@ $vbs  = Join-Path $repo "run-hidden.vbs"
 $defs = @(
   @{ Name = "NaukriProfileRefresh"
      Args = "naukri-profile-refresh.js"
-     Desc = "Hourly Naukri profile refresh (headline dot cycle + daily resume re-upload). Runs hidden." },
+     Desc = "$IntervalMinutes-min Naukri profile refresh (headline dot cycle + daily resume re-upload). Runs hidden." },
   @{ Name = "NaukriAutoApply"
      Args = "auto-apply-runner.js naukri --live --scheduled"
      Desc = "Hourly Naukri auto-apply. 10 per run, 20/day cap, 09:00-23:00 only. Runs hidden." },
@@ -71,11 +64,9 @@ foreach ($d in $defs) {
     #   "The task XML contains a value which is incorrectly formatted or out of range."
     # Leaving Duration empty with StopAtDurationEnd false is what "repeat indefinitely"
     # actually looks like in the task XML.
-    $trigger = New-ScheduledTaskTrigger -AtLogOn -User $env:USERNAME
-    $trigger.Repetition = New-CimInstance -ClassName MSFT_TaskRepetitionPattern `
-                            -Namespace Root/Microsoft/Windows/TaskScheduler -ClientOnly `
-                            -Property @{ Interval = 'PT1H'; StopAtDurationEnd = $false }
-    $trigger.Delay = 'PT2M'   # let the desktop settle before the first run
+    $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) `
+                 -RepetitionInterval (New-TimeSpan -Minutes $IntervalMinutes) `
+                 -RepetitionDuration (New-TimeSpan -Days 3650)
 
     # IgnoreNew: if an hourly run is still going when the next hour comes round, skip
     # the new one rather than running two browsers against the same Chrome profile.

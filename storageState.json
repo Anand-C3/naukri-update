@@ -1,0 +1,719 @@
+{
+  "cookies": [
+    {
+      "name": "_t_ds",
+      "value": "897e48a1789383322-42897e48a-0897e48a",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1820919322.612943,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "J",
+      "value": "0",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1820925139.932784,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.1.770930531.1789383325",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1823949041.722115,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "OTZ",
+      "value": "8784655_34_34__34_",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1791975326,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "IDE",
+      "value": "AHWqTUnYGg3jgKXhQPkDthbIlhvczlokgePKMoIeXWgl-638T02Cp8GHk-jFfPRZ",
+      "domain": ".doubleclick.net",
+      "path": "/",
+      "expires": 1823943331.613495,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "bm_mi",
+      "value": "48B2FC859E7BE0FBD4A214C0A8C1C7D2~YAAQVPDvdXfb9YKgAQAAVOuOnwGn/KtUldFMsqtenC8OcoR4/WYrx2zECTuWveR3s2troFF5EtvTuFVUcqdFpeQa2pMcVmucpFfRnwqwIAqtM7ceWEPsELAY1Yc6dE+gdcZWgxI49NUKLa36VjjPUxst8Dwpf9MEGcBCG5hKNoKmNWg73ETJ05W/kU2JTmikX+TWDklu2qu0DsmVnNTUkH4Q4ui7jRMPJMmHBiQ4QvljdnE5vC+jfjHREdGuuJlmlFmTN7lXsSK2jk1+8unsCUsLiIXczU0PUR2UVawt1ahx8ANX5s+9BIXY6ISYmOdH0iw2AfbRzg==~1",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1789390522.738872,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "NID",
+      "value": "CskCCAES-wEBp2sxrgYyOllWOi0YGyZy3Q6XmmcpMEBWLq489HSvVDYIwf8wVcApEkGk2ZROFviOfq9u9BbCxsBAutvbzVGLlJGJ53AFCjZfRfDWto5MD_HB_qnP6k9KTZZJlXy9QmCHalUS5GvcSwLBx5wuassyLDpcBwb4AX_T_vPgr2J_sTR81KPyCND3okkR59z0qJC8H3Oy9XykPzaRxOyg1akJL5OMEMH7dRf5KQd3Yp_P1WpSqeCN8gK0ixBJvMzLwEMwG2XGcznv6U2Fo4RTAkFYnadd-TcxlAUhLwHlBuChQA0ttc-2vFqaOu2ABkH56k4VMHY0z-QcYF_9eSgBMkUBDiveEY-BLI6jD4OBkW_eo-3QzUNevGD6NNFREg8_yMg1sXJtW3IfrqBDIu0evOsXJZ3fFAfi3Y1ZJpadz7QcbmF4fgg",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1805194526.59836,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "HSID",
+      "value": "AnfTIet5Zz0KjMizF",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1823943349.598643,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SSID",
+      "value": "AbpxymKevPZJPZMEG",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1823943349.598671,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "APISID",
+      "value": "UXqW4Dvj5ytblizm/AlGK6Gs26X6W6BnEg",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1823943349.598697,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SAPISID",
+      "value": "rAy8C2PtjKrzBPv9/AriGqnb7kv0mykAZi",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1823943349.598724,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-1PAPISID",
+      "value": "rAy8C2PtjKrzBPv9/AriGqnb7kv0mykAZi",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1823943349.598751,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-3PAPISID",
+      "value": "rAy8C2PtjKrzBPv9/AriGqnb7kv0mykAZi",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1823943349.598779,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "ACCOUNT_CHOOSER",
+      "value": "AFx_qI7lcZgUe8lHYbXmAl3bAAED_-6h9fqicT2ePWyeoVmk_DDajCI793b2WhQ1wZhM2_aqFd9MKtgk_kbn20W0cbnTkNeTYxDW0d9QzmH4jpHtujhoj_bpDDDaY0E853TMp32rKBL9rbnDNZuhPwummZ-AsqH0GQ",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1823943349.598805,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "LSID",
+      "value": "s.IN|s.youtube:g.a000CgnPpXP2mAZ533Nxg3nwaPCpvXBX0n1BfofVlRCIrWsTU1teKehWBTD07we4UB1RI2bR4QACgYKAfYSARYSFQHGX2Mi-4GkSNpuP3sw132F3QzKchoVAUF8yKrNE1s_b3EaykedH-0fonfu0076",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1823943349.784732,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Host-1PLSID",
+      "value": "s.IN|s.youtube:g.a000CgnPpXP2mAZ533Nxg3nwaPCpvXBX0n1BfofVlRCIrWsTU1te95R8Z0Tazn4eGlXWPBghzwACgYKAZ0SARYSFQHGX2MiU4peYTxJ3ANTDzh_12mCrxoVAUF8yKoHGsLVfJ-UqSFAEvFEr0D60076",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1823943349.785338,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Host-3PLSID",
+      "value": "s.IN|s.youtube:g.a000CgnPpXP2mAZ533Nxg3nwaPCpvXBX0n1BfofVlRCIrWsTU1te4w4X3pizEFJGmFJY9QsKMgACgYKAbMSARYSFQHGX2Mivd_blc3cdFlcMOOtHYmCZxoVAUF8yKrDuYMr8Xg6Ov2K4VH1GO7R0076",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1823943349.785719,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-1PSIDTS",
+      "value": "sidts-CjQBXMw41VbhZZocbyyValONPuNEOm8g28Q9VTwvliiYQMCzVYemMxOZVjM-bCcqUxY7wpTLEAA",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1820919350.110676,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-3PSIDTS",
+      "value": "sidts-CjQBXMw41VbhZZocbyyValONPuNEOm8g28Q9VTwvliiYQMCzVYemMxOZVjM-bCcqUxY7wpTLEAA",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1820919350.110821,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "HSID",
+      "value": "AuL-JdDyKEostq6fn",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1823943350.110868,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SSID",
+      "value": "AQixumtAoX81kJARk",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1823943350.110911,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "APISID",
+      "value": "UXqW4Dvj5ytblizm/AlGK6Gs26X6W6BnEg",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1823943350.110974,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SAPISID",
+      "value": "rAy8C2PtjKrzBPv9/AriGqnb7kv0mykAZi",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1823943350.111026,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-1PAPISID",
+      "value": "rAy8C2PtjKrzBPv9/AriGqnb7kv0mykAZi",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1823943350.111084,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-3PAPISID",
+      "value": "rAy8C2PtjKrzBPv9/AriGqnb7kv0mykAZi",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1823943350.111119,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SID",
+      "value": "g.a000CgnPpSw5ncphhfPRZszA-nYT36xHCFv_N2ZjulX1gzWu2fkq4JxaO8ND-jHdRLrzGJN8WAACgYKAW8SARYSFQHGX2MifsXktQNGcCq2Nk5ipgUeMRoVAUF8yKqPtieCGp2eC-sJ2Q86Y5tj0076",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1823943350.111167,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-1PSID",
+      "value": "g.a000CgnPpSw5ncphhfPRZszA-nYT36xHCFv_N2ZjulX1gzWu2fkq29ah1g1ufP1FndtB6J6V4QACgYKAaUSARYSFQHGX2MiFXnTwT4QomBb5CrSRbNDvhoVAUF8yKrHV7cNIPP_INBvgfuruzBA0076",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1823943350.111207,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-3PSID",
+      "value": "g.a000CgnPpSw5ncphhfPRZszA-nYT36xHCFv_N2ZjulX1gzWu2fkqgOoMH1n83y6EYtdke-D7igACgYKAW0SARYSFQHGX2MiCyucSv5meOxrCWADtybCbhoVAUF8yKp3mcSuc-7IHbaXpb4fdAXI0076",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1823943350.111244,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "HSID",
+      "value": "AuL-JdDyKEostq6fn",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1823943350.402663,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SSID",
+      "value": "AQixumtAoX81kJARk",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1823943350.402794,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "APISID",
+      "value": "UXqW4Dvj5ytblizm/AlGK6Gs26X6W6BnEg",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1823943350.402834,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SAPISID",
+      "value": "rAy8C2PtjKrzBPv9/AriGqnb7kv0mykAZi",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1823943350.402871,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-1PAPISID",
+      "value": "rAy8C2PtjKrzBPv9/AriGqnb7kv0mykAZi",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1823943350.402908,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-3PAPISID",
+      "value": "rAy8C2PtjKrzBPv9/AriGqnb7kv0mykAZi",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1823943350.402949,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "NID",
+      "value": "534=N-bgl738zEH-zXcDonJZzMOD0VmCZ0iWVoA3FdPuehQB8BbAfLMFUAxqhuhgHp2IIGuBAriXFCwASvdnDtBOTU5opNBRNDzDjpoZY8duwmzHM04EgVJKvIp3_et_lEBps1UPhU3uDm_5nUXJJ3LGTEyQ1XKt69cCKBsvKatdBr77c31wj_vUL2pSefcb_Gj_4rEdQ6QIHHWQEl8ZR8yNNIdagA",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1805194550.402989,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SID",
+      "value": "g.a000CgnPpSw5ncphhfPRZszA-nYT36xHCFv_N2ZjulX1gzWu2fkq4JxaO8ND-jHdRLrzGJN8WAACgYKAW8SARYSFQHGX2MifsXktQNGcCq2Nk5ipgUeMRoVAUF8yKqPtieCGp2eC-sJ2Q86Y5tj0076",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1823943350.403018,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-1PSID",
+      "value": "g.a000CgnPpSw5ncphhfPRZszA-nYT36xHCFv_N2ZjulX1gzWu2fkq29ah1g1ufP1FndtB6J6V4QACgYKAaUSARYSFQHGX2MiFXnTwT4QomBb5CrSRbNDvhoVAUF8yKrHV7cNIPP_INBvgfuruzBA0076",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1823943350.403045,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-3PSID",
+      "value": "g.a000CgnPpSw5ncphhfPRZszA-nYT36xHCFv_N2ZjulX1gzWu2fkqgOoMH1n83y6EYtdke-D7igACgYKAW0SARYSFQHGX2MiCyucSv5meOxrCWADtybCbhoVAUF8yKp3mcSuc-7IHbaXpb4fdAXI0076",
+      "domain": ".google.co.in",
+      "path": "/",
+      "expires": 1823943350.403072,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SID",
+      "value": "g.a000CgnPpQnsX70raApuyj2zoPFsE8OJEUtxEJ2YpiJhQ4VpN17md7xmk-hDnvHW9hXbRBAgggACgYKARMSARYSFQHGX2MiTLnIJfShqDYJJRGnfaoJlxoVAUF8yKryyorwB9x__HB6bKchyQIi0076",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1823943350.862834,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-1PSID",
+      "value": "g.a000CgnPpQnsX70raApuyj2zoPFsE8OJEUtxEJ2YpiJhQ4VpN17mdiGJ-xvLXw0UNwHOcGlFKQACgYKAVASARYSFQHGX2MiTTMtQSk7zbToTcf0b4JaJxoVAUF8yKqvWttMzsIaBTlUCJT-8C3L0076",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1823943350.862952,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-3PSID",
+      "value": "g.a000CgnPpQnsX70raApuyj2zoPFsE8OJEUtxEJ2YpiJhQ4VpN17m2Zfgr-PtBBQa8hXaMLq90wACgYKARkSARYSFQHGX2MiSL7WxwHWI7VXU-dzpYfuzBoVAUF8yKoPV4Jz3nbkXmHRXepQtsFs0076",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1823943350.863036,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "nauk_rt",
+      "value": "3dc5e94818f442499c72a8a66c4bd912",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1820919351.177692,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "nauk_sid",
+      "value": "3dc5e94818f442499c72a8a66c4bd912",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1820919351.177815,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "nauk_otl",
+      "value": "3dc5e94818f442499c72a8a66c4bd912",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1820919351.17788,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "NKWAP",
+      "value": "c8fc23acf26e675bb7c7f6b94a029f0bb3d5aef1f3922c4eecbb7d061526d1c6b915ad33df70ad7da17faea29e95a5a4~c8fc23acf26e675bb7c7f6b94a029f0bb3d5aef1f3922c4eecbb7d061526d1c6b915ad33df70ad7da17faea29e95a5a4~1~0",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1820919351.347024,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "MYNAUKRI[UNID]",
+      "value": "337b6f805df14982b718f9b1cdabd46d",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1820919351.347206,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "nauk_ps",
+      "value": "default",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1820925041.276393,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "nauk_cs",
+      "value": "default",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1820925041.276554,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Host-GAPS",
+      "value": "1:l6iQDWd9eLX3-lVgBmqjMAbwxM7XuCm2o5dtiPsRQ1DaY8cFIxDyoIk9csLda7fSxwQn62AWoFlrChQcsTzfJH50Z5hsVZ-RAxpMDbYkKCfRVR0UdwcGPmQBrPWRe8b0Do3DTRZPW5xXFe2SCctji5xFLK3jEyW-xcLZbHFzfrAtm2nL22M:qaRbA3Jlwnwmutu6",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1823943351.736732,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "nauk_at",
+      "value": "eyJraWQiOiIzIiwidHlwIjoiSldUIiwiYWxnIjoiUlM1MTIifQ.eyJkZXZpY2VUeXBlIjoiZDNza3QwcCIsInVkX3Jlc0lkIjozNDE0NzMyNjAsInN1YiI6IjM1MjU5NjczOCIsInVkX3VzZXJuYW1lIjoidmFsbHVyaS5hbmFuZC5kZXZAZ21haWwuY29tIiwidWRfaXNFbWFpbCI6dHJ1ZSwiaXNzIjoiSW5mb0VkZ2UgSW5kaWEgUHZ0LiBMdGQuIiwidXNlckFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2IiwiaXBBZHJlc3MiOiIxMTcuMjIxLjk0LjMyIiwidWRfaXNUZWNoT3BzTG9naW4iOmZhbHNlLCJ1c2VySWQiOjM1MjU5NjczOCwic3ViVXNlclR5cGUiOiIiLCJ1c2VyU3RhdGUiOiJBVVRIRU5USUNBVEVEIiwidWRfaXNQYWlkQ2xpZW50IjpmYWxzZSwidWRfZW1haWxWZXJpZmllZCI6dHJ1ZSwidXNlclR5cGUiOiJqb2JzZWVrZXIiLCJzZXNzaW9uU3RhdFRpbWUiOiIyMDI2LTA5LTE0VDE2OjI1OjUxIiwidWRfZW1haWwiOiJ2YWxsdXJpLmFuYW5kLmRldkBnbWFpbC5jb20iLCJ1c2VyUm9sZSI6InVzZXIiLCJleHAiOjE3ODkzOTE0NjEsInRva2VuVHlwZSI6ImFjY2Vzc1Rva2VuIiwiaWF0IjoxNzg5Mzg3ODYxLCJqdGkiOiIzZGM1ZTk0ODE4ZjQ0MjQ5OWM3MmE4YTY2YzRiZDkxMiIsInBvZElkIjoicHJvZC01YmJjNmJiNTliLXF6OTUyIn0.pGcbmxyfS1hiTcDZ70MD6hBWh8XKlH-17Jeebx-i8veF7mEZpBh25udKxUVdfZBf0iZ6JEk0ZGITPxjLIspl2N1AkFOnkNQ1GoWz-dmnf5dH7PeUjvJHxLuhbzl9Yt6TEc9KchoSlmrsfA56WssTCkyDr9GRcZZ9FWE91K40itZNRD7hQ5xwH4DUZo8Cy9F1cHXVOaD3A-2LsjoNmryVOjpxTfl6T10Fqjdgg7RKIP8h5DlfYtO0BMIdRoCnahgEbk_Lx90hAjs1-TTG2lowV6GkxBAfdpaD_clRXGmBqY9Wo-AFQckwP14BB6UG3zaxQrJIUL2Y1Ir9oTPsz6IqCg",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1789391461.177571,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "is_login",
+      "value": "1",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1789391461.177778,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Host-GAPSTS",
+      "value": "gapsts-CiwBxkkdjcJTjP3kpW6s2NB3ZqteE6gI7hHOlyO9axuZam73apVsoEtldiHK9BAB",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1823949038.049145,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-1PSIDTS",
+      "value": "sidts-CjYBXMw41Qd7zXpueW1V9pdst0GfoUQZrKEIJdrxNGVMVKFpCfs8LstVtx9yX0seovdnj5U550AQAA",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1820925038.19465,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-1PSIDRTS",
+      "value": "sidts-CjYBXMw41Qd7zXpueW1V9pdst0GfoUQZrKEIJdrxNGVMVKFpCfs8LstVtx9yX0seovdnj5U550AQAA",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1789389638.194817,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-3PSIDTS",
+      "value": "sidts-CjYBXMw41Qd7zXpueW1V9pdst0GfoUQZrKEIJdrxNGVMVKFpCfs8LstVtx9yX0seovdnj5U550AQAA",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1820925038.194888,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-3PSIDRTS",
+      "value": "sidts-CjYBXMw41Qd7zXpueW1V9pdst0GfoUQZrKEIJdrxNGVMVKFpCfs8LstVtx9yX0seovdnj5U550AQAA",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1789389638.194966,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "HOWTORT",
+      "value": "ul=1789389040669&r=https%3A%2F%2Fwww.naukri.com%2Fmnjuser%2Fprofile&hd=1789389040778",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1789389160,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "bm_sv",
+      "value": "8834EF7F5A67F80A2CC4E20172A56CDA~YAAQVPDvdQWe+IKgAQAAeO/lnwE7ciGKwTO33L03SJBkXBKgTSfAA9qY5/ir/fNgqKKveOoT7suDyc+8ezqdkXAtGV8jjV9IdyOV1CLOEP/1Fq7gVOip+vfpLkw32H9ZoIzFj6xFIz2kEZfOSlWIbpzSTku2aBXxYfacLxHrG+1/3hFMotiTxb2aZp1+AQWVSHjoUQWDiqWK2SOPH6fKMQz8we+9Khj1HrHn5lPsFlnsiQ4nMLJlncuDE7v0HtTzrVk=~1",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1789390522.436722,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_K2YBNZVRLL",
+      "value": "GS2.1.s1789383324$o1$g1$t1789389041$j57$l0$h656060494",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1823949041.721462,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_gcl_au",
+      "value": "1.1.1361123586.1789383325.559067848.1789383354.1789389039.1208856266.1789383325.1789389041",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1797159325,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ak_bmsc",
+      "value": "2067876A2AD2B55AB8E6581D4108D9C6~000000000000000000000000000000~YAAQTfDvdQfx+YKgAQAAKnDnnwEeC3wJTcK397GhCt3OqYz0SbZBDuK38s9gDIB5L+Ap6ATAkkYbTHbYeZcfRqkcaqcyQOvN9ptk26DDTJ2OIgaze/lLcWfP0IEh0DAOBu5VcLshyw8QeyGOjMPkqyJIFOFd3739+g+WARnOmftwrl8x4v146iNulq2xZPNDqmoG+47oE+RegMOCnEXgITXI3T3VktnIcGyMlhoxPX9VB0S2QSlN8WqcbjIRdT/BUFR1j9h7vYHDrS3CUEHW1uagZa9BY0rES2zu9haymke7su/C92bye5D+r+4f/dlNRIaZUbVjcH0BQPImcdUj2Ju8xhv3O6HaTpRc/nyPSnTsHAq5IXYe+8GSHJvdpkckAXjee774+5X4Rd6Z32Hfn1pR03+Jih81kYPIXsMz4PpbUjWrj5Q0h+3/rRE7lZSdAAlJN550Wbc3rEUG1v24RISNRj7WjEqxlWTmJwwhUb7oV59Qy+os5Mhp3oBMkSTtUC2ixg==",
+      "domain": ".naukri.com",
+      "path": "/",
+      "expires": 1789390521.933003,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SIDCC",
+      "value": "AKEyXzWvPyFr0Gf4t-lXq1RYYV69NVpz802tIlcPOK5jtVhfrZWvgr4VjCeCxMdqSRYugBXaUA",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1820925140.969872,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-1PSIDCC",
+      "value": "AKEyXzU8jCWftbuQEgTL1UUX7xBGo-0Hisu5pFYWnrZMeXQLdV2L74cawaR4ch-dKPk8hjJe",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1820925140.970063,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-3PSIDCC",
+      "value": "AKEyXzXF8hlAfqWRuxHU0qbLyFmxlaVQVWdhKVo9SWQRgufcqqr-nUup1yDN6nMydyzKRPI1-w",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1820925140.970268,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://www.naukri.com",
+      "localStorage": [
+        {
+          "name": "theme",
+          "value": "one-theme"
+        },
+        {
+          "name": "profile_pro_drawer_last_shown",
+          "value": "1789324200000"
+        },
+        {
+          "name": "eventName_ub",
+          "value": "\"editProfileClick\""
+        },
+        {
+          "name": "timerWindow-valluri.anand.dev@gmail.com",
+          "value": "[{\"timeStamp\":1789383355239,\"date\":\"14/9/2026\"}]"
+        },
+        {
+          "name": "deviceId_ub",
+          "value": "\"07fccad7-57de-132c-5010-68c887207dc2\""
+        },
+        {
+          "name": "uniqueDid_ub",
+          "value": "\"07fccad7-57de-132c-5010-68c887207dc2-1789383206773\""
+        },
+        {
+          "name": "_gcl_ls",
+          "value": "{\"schema\":\"gcl\",\"version\":1,\"gsid_dc\":{\"value\":{\"joinId\":\"1A4Dlc6wrlvyZE5PR28B_gSjIUAtyJu-1Q\",\"lastJoinedTimeMs\":1789389039125},\"expires\":1789389339125},\"gcl_ctr\":{\"value\":{\"value\":45,\"timeouts\":0,\"errors\":0,\"eopCount\":0,\"creationTimeMs\":1789389041725},\"expires\":1797165041725},\"last_convs\":{\"value\":[{\"random\":1789389041723,\"label\":\"RRSxCMClxKgDEMG7p5cD\"}],\"expires\":1797165041726}}"
+        },
+        {
+          "name": "globalWidgetState",
+          "value": "{\"tagStateTTL\":1789410600000,\"ws\":{\"t4169_click_submit\":0,\"t5678_click_submit\":0,\"t4315_click_cancel\":0,\"t4315_click_skip\":0,\"t2536_click_add_salary_breakup\":0,\"t2906_click_add_locality\":0,\"t4617_click_submit\":0,\"t2906_view\":0,\"t4170_click_submit\":0,\"t2683_view\":0,\"t2683_click_submit\":0,\"t2536_view\":0,\"t5835_view\":0,\"t2536\":{\"click_add_salary_breakup\":0,\"view\":0},\"t2906\":{\"click_add_locality\":0,\"view\":0},\"t4169\":{\"click_submit\":0,\"view\":5},\"t4617\":{\"click_submit\":0},\"t4170\":{\"click_submit\":0},\"t2683\":{\"view\":0,\"click_submit\":0},\"t5678\":{\"click_submit\":0,\"view\":5},\"t4315\":{\"click_cancel\":0,\"click_skip\":0},\"t5835\":{\"view\":0},\"t4171\":{\"view\":5},\"t6231\":{\"view\":10},\"t5853\":{\"view\":10}}}"
+        },
+        {
+          "name": "tdsLogEpoch1_0",
+          "value": "1789383205374"
+        },
+        {
+          "name": "version_ub",
+          "value": "4"
+        },
+        {
+          "name": "eventType_ub",
+          "value": "undefined"
+        },
+        {
+          "name": "cnid_ub",
+          "value": "\"337b6f805df14982b718f9b1cdabd46d\""
+        },
+        {
+          "name": "eventId_ub",
+          "value": "\"07fccad7-57de-132c-5010-68c887207dc2-1789389041800\""
+        },
+        {
+          "name": "widgets-[ni-desktop-profile]-c1",
+          "value": "{\"imd\":{\"profile-middle-section-widgets\":{\"Profile Widgets\":{\"idx\":34}},\"power-profile\":{\"inventory-1\":{\"idx\":0}},\"dynamicForm-diversity-fields\":{\"inventory-1\":{\"idx\":0}}},\"ts\":{\"ih\":null,\"ttl\":27247,\"rts\":1789383352548},\"wmd\":{\"covid-laidoffprofile-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-marketing-communication-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-bfsi-investments-trading-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-finance-accounting-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-construction-site-engineering-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-security-services-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-project-program-management-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-legal-regulatory-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-consulting-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-research-development-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-quality-assurance-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-procurement-supply-chain-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-administration-facilities-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-human-resources-editable-widget-segmented-profil_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-teaching-training-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-ux-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-doctor-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-pharmacist-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-nurse-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-editable-widget-segmented-profile-els-react_v0\":{\"fts\":1789383352549},\"ni-desktop-editable-widget-segmented-profile-els-fresher-react_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-iti-editable-widget_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-editable-widget-diversity-womenonbreak_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-editable-widget-diversity-military_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-editable-widget-diversity-disability_v0\":{\"fts\":1789388405952},\"ni-desktop-editable-widget-hospitality-segment-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-bpo-editable-widget-segmented-with-prefilled-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-bpo-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-oilandgas-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-bfsi-editable-widget-segmented-with-prefilled-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-bfsi-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-infra-and-construction-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-sales-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-auto-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-pharma-editable-widget-segmented-profile_v0\":{\"fts\":1789383352549},\"ni-desktop-react-parsed-profile-wdgt_v0\":{\"fts\":1789388405952},\"ni-desktop-dashboard-iti-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-add-salary-breakup-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-add-locality-wdgt_v0\":{\"fts\":1789383352549},\"desktop-edit-resume-ai-draft-wdgt_v0\":{\"fts\":1789388405952},\"desktop-edit-resume-ai-high-wdgt_v0\":{\"fts\":1789388405952},\"desktop-edit-resume-ai-low-wdgt_v0\":{\"fts\":1789388405952},\"ni-desktop-pro-profile-wdgt_v0\":{\"fts\":1789388405952},\"ni-desktop-naukri-pro-profile-pre-purchase-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-naukri-pro-profile-pre-purchase-exp1-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-naukri-pro-profile-post-purchase-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-power-profile-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-power-profile-prepurchase-profile-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-power-profile-postpurchase-profile-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-profile-nps-wdgt_v0\":{\"fts\":1789388405952},\"ni-desktop-preview-form-doctors-widget_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-nurse-widget_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-pharmacist-widget_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-els-widget_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-oilandgas-widget_v0\":{\"fts\":1789383352549},\"desktop-preview-form_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-sales-widget_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-pharma_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-bfsi-widget_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-hospitality-widget_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-procurement-supply-chain-purchase-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-procurement-supply-chain-scm-logistics-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1072-procurement-supply-chain-stores-material-management-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-procurement-supply-chain-import-export-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1074-finance-accounting-taxation-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1075-finance-accounting-audit-control-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1076-finance-accounting-treasury-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1077-bfsi-investments-trading-banking-operations-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1078-bfsi-investments-trading-investment-banking-pe-vc-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1079-bfsi-investments-trading-lending-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1080-bfsi-investments-trading-asset-wealth-mgmt-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1081-bfsi-investments-trading-treasury-forex-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1082-bfsi-investments-trading-other-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1083-teaching-training-all-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1084-teaching-training-corporate-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1085-teaching-training-subject-specialization-teacher-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1086-teaching-training-university-level-educator-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1087-ux-design-architecture-all-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1088-marketing-communication-corporate-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1089-marketing-communication-digital-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1090-marketing-communication-advertising-creative-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1091-hr-staffing-recruitment-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1092-hr-staffing-compensation-benefits-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1093-hr-staffing-operations-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1094-administration-facilities-all-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1095-administration-facilities-facility-management-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1269-qa-bpq-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1270-qa-prod-mfg-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1271-qa-other-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1272-cse-construction-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1273-cse-survey-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1274-consult-mgmt-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1275-consult-it-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1276-consult-other-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1277-rnd-eng-mfg-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1278-rnd-pharma-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1279-ppm-other-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1280-ppm-construction-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1281-ppm-it-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1282-legal-corp-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1283-legal-ops-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1284-legal-arbitration-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1285-security-officer-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-1286-security-other-wdgt_v0\":{\"fts\":1789383352549},\"ni-desktop-preview-form-diversity-fields-wdgt_v0\":{\"fts\":1789388405952}},\"smd\":{\"resume360\":{\"io\":[\"inventory-1\"]}}}"
+        },
+        {
+          "name": "eventslen_ub",
+          "value": "undefined"
+        },
+        {
+          "name": "globalWidgetState-valluri.anand.dev@gmail.com",
+          "value": "{\"tagStateTTL\":1789410600000,\"ws\":{\"t2536_click_add_salary_breakup\":0,\"t2906_click_add_locality\":0,\"t4169_click_submit\":0,\"t4617_click_submit\":0,\"t2906_view\":0,\"t4170_click_submit\":0,\"t2683_view\":0,\"t2683_click_submit\":0,\"t2536_view\":0,\"t5678_click_submit\":0,\"t4315_click_cancel\":0,\"t4315_click_skip\":0,\"t5835_view\":0,\"t2536\":{\"click_add_salary_breakup\":0,\"view\":0},\"t2906\":{\"click_add_locality\":0,\"view\":0},\"t4169\":{\"click_submit\":0,\"view\":14},\"t4617\":{\"click_submit\":0},\"t4170\":{\"click_submit\":0},\"t2683\":{\"view\":0,\"click_submit\":0},\"t5678\":{\"click_submit\":0,\"view\":14},\"t4315\":{\"click_cancel\":0,\"click_skip\":0},\"t5835\":{\"view\":0},\"t4171\":{\"view\":14},\"t6231\":{\"view\":28},\"t5853\":{\"view\":28}}}"
+        },
+        {
+          "name": "widgets-[ni-desktop-profile]-c1-valluri.anand.dev@gmail.com",
+          "value": "{\"imd\":{\"profile-middle-section-widgets\":{\"Profile Widgets\":{\"idx\":34}},\"power-profile\":{\"inventory-1\":{\"idx\":0}},\"dynamicForm-diversity-fields\":{\"inventory-1\":{\"idx\":0}}},\"ts\":{\"ih\":null,\"ttl\":27247,\"rts\":1789383352967},\"wmd\":{\"covid-laidoffprofile-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-marketing-communication-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-bfsi-investments-trading-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-finance-accounting-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-construction-site-engineering-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-security-services-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-project-program-management-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-legal-regulatory-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-consulting-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-research-development-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-quality-assurance-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-procurement-supply-chain-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-administration-facilities-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-human-resources-editable-widget-segmented-profil_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-teaching-training-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-ux-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-doctor-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-pharmacist-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-nurse-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-editable-widget-segmented-profile-els-react_v0\":{\"fts\":1789383352967},\"ni-desktop-editable-widget-segmented-profile-els-fresher-react_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-iti-editable-widget_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-editable-widget-diversity-womenonbreak_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-editable-widget-diversity-military_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-editable-widget-diversity-disability_v0\":{\"fts\":1789389041441},\"ni-desktop-editable-widget-hospitality-segment-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-bpo-editable-widget-segmented-with-prefilled-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-bpo-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-oilandgas-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-bfsi-editable-widget-segmented-with-prefilled-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-bfsi-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-infra-and-construction-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-sales-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-auto-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-pharma-editable-widget-segmented-profile_v0\":{\"fts\":1789383352967},\"ni-desktop-react-parsed-profile-wdgt_v0\":{\"fts\":1789389041441},\"ni-desktop-dashboard-iti-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-add-salary-breakup-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-add-locality-wdgt_v0\":{\"fts\":1789383352967},\"desktop-edit-resume-ai-draft-wdgt_v0\":{\"fts\":1789389041441},\"desktop-edit-resume-ai-high-wdgt_v0\":{\"fts\":1789389041441},\"desktop-edit-resume-ai-low-wdgt_v0\":{\"fts\":1789389041441},\"ni-desktop-pro-profile-wdgt_v0\":{\"fts\":1789389041441},\"ni-desktop-naukri-pro-profile-pre-purchase-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-naukri-pro-profile-pre-purchase-exp1-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-naukri-pro-profile-post-purchase-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-power-profile-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-power-profile-prepurchase-profile-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-power-profile-postpurchase-profile-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-profile-nps-wdgt_v0\":{\"fts\":1789389041441},\"ni-desktop-preview-form-doctors-widget_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-nurse-widget_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-pharmacist-widget_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-els-widget_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-oilandgas-widget_v0\":{\"fts\":1789383352967},\"desktop-preview-form_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-sales-widget_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-pharma_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-bfsi-widget_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-hospitality-widget_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-procurement-supply-chain-purchase-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-procurement-supply-chain-scm-logistics-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1072-procurement-supply-chain-stores-material-management-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-procurement-supply-chain-import-export-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1074-finance-accounting-taxation-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1075-finance-accounting-audit-control-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1076-finance-accounting-treasury-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1077-bfsi-investments-trading-banking-operations-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1078-bfsi-investments-trading-investment-banking-pe-vc-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1079-bfsi-investments-trading-lending-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1080-bfsi-investments-trading-asset-wealth-mgmt-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1081-bfsi-investments-trading-treasury-forex-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1082-bfsi-investments-trading-other-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1083-teaching-training-all-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1084-teaching-training-corporate-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1085-teaching-training-subject-specialization-teacher-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1086-teaching-training-university-level-educator-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1087-ux-design-architecture-all-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1088-marketing-communication-corporate-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1089-marketing-communication-digital-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1090-marketing-communication-advertising-creative-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1091-hr-staffing-recruitment-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1092-hr-staffing-compensation-benefits-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1093-hr-staffing-operations-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1094-administration-facilities-all-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1095-administration-facilities-facility-management-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1269-qa-bpq-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1270-qa-prod-mfg-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1271-qa-other-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1272-cse-construction-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1273-cse-survey-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1274-consult-mgmt-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1275-consult-it-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1276-consult-other-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1277-rnd-eng-mfg-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1278-rnd-pharma-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1279-ppm-other-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1280-ppm-construction-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1281-ppm-it-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1282-legal-corp-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1283-legal-ops-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1284-legal-arbitration-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1285-security-officer-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-1286-security-other-wdgt_v0\":{\"fts\":1789383352967},\"ni-desktop-preview-form-diversity-fields-wdgt_v0\":{\"fts\":1789389041441}},\"smd\":{\"resume360\":{\"io\":[\"inventory-1\"]}}}"
+        }
+      ]
+    }
+  ]
+}

@@ -50,11 +50,13 @@
 
     // Job titles to apply to (case-insensitive substring match on the job title)
     TITLE_KEYWORDS: [
+      'copilot studio', 'copilot engineer', 'copilot', 'microsoft copilot',
+      'generative ai', 'gen ai', 'genai', 'llm', 'agentic', 'agent engineer',
+      'ai engineer', 'ai developer', 'ai specialist', 'rag engineer', 'azure ai',
+      'ml engineer', 'artificial intelligence', 'machine learning',
       'full stack', 'fullstack', 'full-stack', 'mern', 'backend', 'back end',
       'frontend', 'front end', 'software engineer', 'software developer',
-      'web developer', 'ai engineer', 'ai developer', 'ai specialist',
-      'ml engineer', 'artificial intelligence', 'machine learning',
-      'generative ai', 'gen ai', 'genai', 'llm', 'agentic',
+      'web developer', 'python developer', 'python engineer',
       'react', 'node', 'javascript', 'js developer', 'js engineer',
       'typescript', 'python', 'mobile',
       'react native', 'sde', 'member of technical staff',

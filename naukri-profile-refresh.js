@@ -132,24 +132,38 @@ async function googleLogin(ctx, page) {
 }
 
 (async () => {
-  const ctx = await chromium.launchPersistentContext(PROFILE_DIR, {
-    channel: "chrome",
-    headless: false, // naukri's Akamai bot-check blocks headless; minimised headed instead
+  if (process.env.NAUKRI_SESSION_B64) {
+    try {
+      const decoded = Buffer.from(process.env.NAUKRI_SESSION_B64, "base64").toString("utf8");
+      fs.writeFileSync(path.join(__dirname, "storageState.json"), decoded, "utf8");
+      log("Loaded session from NAUKRI_SESSION_B64 environment secret.");
+    } catch (e) {
+      log(`Warning: Failed to decode NAUKRI_SESSION_B64: ${e.message}`);
+    }
+  }
+
+  const isCI = !!process.env.CI || process.platform !== "win32";
+  const launchOptions = {
+    headless: isCI,
     viewport: { width: 1280, height: 850 },
-    // --window-position pins an on-screen origin; the profile still carries the old
-    // -32000 bounds, which would otherwise make a restored window invisible.
     args: [
       "--disable-blink-features=AutomationControlled",
-      // Hidden runs launch off-screen so the window never appears at all: hiding can
-      // only happen after the window exists, which showed up as a 1-3s flash of
-      // "about:blank - Google Chrome" on every hourly run. --show/--minimize/login
-      // need a real on-screen origin instead, and show-windows.js moves a hidden
-      // window back into view before showing it.
-      SHOW_WINDOW || MINIMIZE_ONLY || LOGIN_MODE
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      isCI || SHOW_WINDOW || MINIMIZE_ONLY || LOGIN_MODE
         ? "--window-position=0,0"
         : "--window-position=-32000,-32000",
     ],
-  });
+  };
+  if (!isCI) {
+    launchOptions.channel = "chrome";
+  }
+  const storagePath = path.join(__dirname, "storageState.json");
+  if (fs.existsSync(storagePath)) {
+    launchOptions.storageState = storagePath;
+  }
+
+  const ctx = await chromium.launchPersistentContext(PROFILE_DIR, launchOptions);
   // Hidden rather than parked at -32000,-32000: off-screen made the taskbar button
   // useless, because "restoring" put the window back where no monitor reaches.
   // Pass --show to keep it on screen, --minimize to leave it in the taskbar.

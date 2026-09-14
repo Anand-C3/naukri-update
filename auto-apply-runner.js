@@ -54,13 +54,13 @@ const SITES = {
     profile: '.indeed-chrome-profile',
     // sort=date → newest first; fromage=14 → only jobs posted in the last 14 days; no location filter
     searches: [
-      'https://in.indeed.com/jobs?q=full+stack+developer&sort=date&fromage=14',
-      'https://in.indeed.com/jobs?q=software+developer&sort=date&fromage=14',
-      'https://in.indeed.com/jobs?q=backend+developer&sort=date&fromage=14',
+      'https://in.indeed.com/jobs?q=generative+ai+engineer&sort=date&fromage=14',
       'https://in.indeed.com/jobs?q=ai+engineer&sort=date&fromage=14',
-      'https://in.indeed.com/jobs?q=gen+ai+developer&sort=date&fromage=14',
-      'https://in.indeed.com/jobs?q=react+developer&sort=date&fromage=14',
-      'https://in.indeed.com/jobs?q=node+js+developer&sort=date&fromage=14',
+      'https://in.indeed.com/jobs?q=copilot+engineer&sort=date&fromage=14',
+      'https://in.indeed.com/jobs?q=llm+engineer&sort=date&fromage=14',
+      'https://in.indeed.com/jobs?q=rag+engineer&sort=date&fromage=14',
+      'https://in.indeed.com/jobs?q=full+stack+developer&sort=date&fromage=14',
+      'https://in.indeed.com/jobs?q=python+developer&sort=date&fromage=14',
     ],
     loginUrl: 'https://in.indeed.com/account/login',
     injectOn: (url) => /indeed\./.test(url),
@@ -71,43 +71,35 @@ const SITES = {
   wellfound: {
     script: 'wellfound-auto-apply.js',
     profile: '.wellfound-chrome-profile',
-    // /jobs alone dead-ends at 19 listings; the role pages carry the real inventory
-    // (measured 2026-08-12). Same list the console script walks internally.
     searches: [
       'https://wellfound.com/jobs',
+      'https://wellfound.com/role/l/ai-engineer/india',
+      'https://wellfound.com/role/r/ai-engineer',
+      'https://wellfound.com/role/r/machine-learning-engineer',
       'https://wellfound.com/role/l/software-engineer/india',
       'https://wellfound.com/role/r/software-engineer',
       'https://wellfound.com/role/r/backend-engineer',
       'https://wellfound.com/role/r/full-stack-engineer',
-      'https://wellfound.com/role/r/frontend-engineer',
-      'https://wellfound.com/role/r/mobile-engineer',
     ],
     loginUrl: 'https://wellfound.com/login',
-    // Wellfound's own record of what was submitted. Checked after every live apply:
-    // the in-page "Applied" stamp only reflects the DOM the apply flow just touched,
-    // so it cannot tell a real submission from one that looked fine and never
-    // registered. /jobs/applied redirects here.
     appliedListUrl: 'https://wellfound.com/jobs/applications',
     injectOn: (url) => /wellfound\.com/.test(url),
     submittedRe: /application sent|DRY_RUN — would click/i,
-    // The wellfound script manages its own per-day seen-list under its own key
-    // (wfAutoApplySeen), so the runner has no key to reset here.
     storeKey: null,
     dailyCap: 50,
     perRun: 10, // 10 per hourly run; the 50/day cap still decides when the day ends
   },
   naukri: {
     script: 'naukri-auto-apply.js',
-    // ponytail: own profile (copy of the refresh's login) so the long apply run never
-    // collides with the hourly refresh on .naukri-chrome-profile. Re-copy if it logs out.
     profile: '.naukri-apply-profile',
     searches: [
-      'https://www.naukri.com/full-stack-developer-jobs?experience=1',
-      'https://www.naukri.com/software-developer-jobs?experience=1',
-      'https://www.naukri.com/backend-developer-jobs?experience=1',
-      'https://www.naukri.com/mern-stack-developer-jobs?experience=1',
-      'https://www.naukri.com/react-js-developer-jobs?experience=1',
-      'https://www.naukri.com/node-js-developer-jobs?experience=1',
+      'https://www.naukri.com/generative-ai-engineer-jobs?experience=2',
+      'https://www.naukri.com/ai-engineer-jobs?experience=2',
+      'https://www.naukri.com/llm-engineer-jobs?experience=2',
+      'https://www.naukri.com/copilot-studio-jobs?experience=2',
+      'https://www.naukri.com/python-developer-jobs?experience=2',
+      'https://www.naukri.com/full-stack-developer-jobs?experience=2',
+      'https://www.naukri.com/software-developer-jobs?experience=2',
     ],
     loginUrl: 'https://www.naukri.com/nlogin/login',
     // inject only on search pages (…-jobs…), never into the job popup the script drives itself
