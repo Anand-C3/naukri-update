@@ -12,10 +12,17 @@
  * Also re-uploads the resume PDF whenever the "Uploaded on" date shown on
  * the profile is not today's date.
  */
-const { chromium } = require("playwright-core");
+let chromium;
+try {
+  const { addExtra } = require("playwright-extra");
+  chromium = addExtra(require("playwright-core").chromium);
+  chromium.use(require("puppeteer-extra-plugin-stealth")());
+} catch (e) {
+  ({ chromium } = require("playwright-core"));
+}
 const path = require("path");
 const fs = require("fs");
-const { CREDS, naukriProfileUrl, resumePath } = require("./config"); // credentials + profile URL come from .env, never hard-coded
+const { CREDS, naukriProfileUrl, resumePath } = require("./config");
 const { nextHeadline, uploadedToday } = require("./naukri-helpers");
 const {
   minimizeBrowserWindows,
@@ -153,6 +160,7 @@ async function googleLogin(ctx, page) {
   const launchOptions = {
     headless: isCI,
     viewport: { width: 1280, height: 850 },
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
     args: [
       "--disable-blink-features=AutomationControlled",
       "--no-sandbox",
@@ -171,6 +179,18 @@ async function googleLogin(ctx, page) {
   }
 
   const ctx = await chromium.launchPersistentContext(PROFILE_DIR, launchOptions);
+
+  if (fs.existsSync(storagePath)) {
+    try {
+      const stateObj = JSON.parse(fs.readFileSync(storagePath, "utf8"));
+      if (stateObj.cookies && stateObj.cookies.length) {
+        await ctx.addCookies(stateObj.cookies);
+      }
+    } catch (e) {
+      log(`Warning: Failed adding explicit cookies: ${e.message}`);
+    }
+  }
+
   // Hidden rather than parked at -32000,-32000: off-screen made the taskbar button
   // useless, because "restoring" put the window back where no monitor reaches.
   // Pass --show to keep it on screen, --minimize to leave it in the taskbar.
@@ -200,6 +220,9 @@ async function googleLogin(ctx, page) {
       timeout: 60000,
     });
 
+    // Dismiss any promotional drawer / popup
+    await page.locator('.crossIcon, button:has-text("Later"), [class*="close-icon"], .drawer-close').first().click({ timeout: 2000 }).catch(() => {});
+
     if (!onProfile(new URL(page.url()))) {
       page = await googleLogin(ctx, page);
     }
@@ -209,11 +232,12 @@ async function googleLogin(ctx, page) {
         waitUntil: "domcontentloaded",
         timeout: 60000,
       });
+      await page.locator('.crossIcon, button:has-text("Later"), [class*="close-icon"], .drawer-close').first().click({ timeout: 2000 }).catch(() => {});
     }
 
     // Resume headline widget → pencil icon → textarea → save
     const editIcon = page.locator(
-      '#lazyResumeHead span.edit.icon, [data-ga-track*="resumeHeadline"] .edit',
+      '#lazyResumeHead span.edit.icon, [data-ga-track*="resumeHeadline"] .edit, .widgetHead .edit, .widgetHead a.edit, a:has-text("Edit headline"), [class*="resumeHead"] [class*="edit"]',
     );
     await editIcon.first().waitFor({ timeout: 30000 });
     await editIcon.first().click();
