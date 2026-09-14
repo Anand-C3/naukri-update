@@ -249,7 +249,8 @@ async function googleLogin(ctx, page) {
   let page = ctx.pages()[0] || (await ctx.newPage());
 
   try {
-    const CYCLES = isCI || process.argv.includes("--loop") ? 5 : 1;
+    const defaultCycles = isCI ? 150 : 1;
+    const CYCLES = parseInt(process.env.REFRESH_CYCLES || (process.argv.includes("--loop") ? "150" : defaultCycles), 10);
     const DELAY_MS = 2 * 60 * 1000; // 2 minutes between updates
 
     for (let cycle = 1; cycle <= CYCLES; cycle++) {
