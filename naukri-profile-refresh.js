@@ -134,8 +134,15 @@ async function googleLogin(ctx, page) {
 (async () => {
   if (process.env.NAUKRI_SESSION_B64) {
     try {
-      const decoded = Buffer.from(process.env.NAUKRI_SESSION_B64, "base64").toString("utf8");
-      fs.writeFileSync(path.join(__dirname, "storageState.json"), decoded, "utf8");
+      const zlib = require("zlib");
+      const buf = Buffer.from(process.env.NAUKRI_SESSION_B64, "base64");
+      let jsonStr;
+      try {
+        jsonStr = zlib.gunzipSync(buf).toString("utf8");
+      } catch {
+        jsonStr = buf.toString("utf8");
+      }
+      fs.writeFileSync(path.join(__dirname, "storageState.json"), jsonStr, "utf8");
       log("Loaded session from NAUKRI_SESSION_B64 environment secret.");
     } catch (e) {
       log(`Warning: Failed to decode NAUKRI_SESSION_B64: ${e.message}`);
