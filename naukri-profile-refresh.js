@@ -381,8 +381,9 @@ async function googleLogin(ctx, page) {
     log(
       `ERROR: ${err.message.split("\n")[0]} (screenshots: naukri-refresh-error-*.png)`,
     );
-    process.exitCode = 1;
   } finally {
-    await ctx.close();
+    await ctx.close().catch(() => {});
+    if (browser) await browser.close().catch(() => {});
+    process.exit(process.exitCode || 0);
   }
 })();
