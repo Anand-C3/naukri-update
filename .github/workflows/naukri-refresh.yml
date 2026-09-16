@@ -4,6 +4,8 @@ on:
   schedule:
     # Heartbeat watchdog every 4 hours to guarantee continuous loop
     - cron: '0 */4 * * *'
+  push:
+    branches: [ main ]
   workflow_dispatch: # Allows manual trigger from GitHub web UI
 
 concurrency:
@@ -59,7 +61,6 @@ jobs:
 
   refresh-account-2:
     name: Refresh Account 2
-    if: ${{ secrets.NAUKRI_SESSION_2_B64 != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 350
     permissions:
