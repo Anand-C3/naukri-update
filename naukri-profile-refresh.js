@@ -179,7 +179,9 @@ async function googleLogin(ctx, page) {
   if (process.env.NAUKRI_SESSION_B64) {
     try {
       const zlib = require("zlib");
-      const buf = Buffer.from(process.env.NAUKRI_SESSION_B64, "base64");
+      const raw = process.env.NAUKRI_SESSION_B64.trim();
+      log(`NAUKRI_SESSION_B64 received (length: ${raw.length}). Decoding...`);
+      const buf = Buffer.from(raw, "base64");
       let jsonStr;
       try {
         jsonStr = zlib.gunzipSync(buf).toString("utf8");
@@ -187,10 +189,12 @@ async function googleLogin(ctx, page) {
         jsonStr = buf.toString("utf8");
       }
       fs.writeFileSync(path.join(__dirname, "storageState.json"), jsonStr, "utf8");
-      log("Loaded session from NAUKRI_SESSION_B64 environment secret.");
+      log("Successfully loaded and saved storageState.json from NAUKRI_SESSION_B64.");
     } catch (e) {
       log(`Warning: Failed to decode NAUKRI_SESSION_B64: ${e.message}`);
     }
+  } else {
+    log("Note: NAUKRI_SESSION_B64 environment variable is empty or not set.");
   }
 
   const isCI = !!process.env.CI || process.platform !== "win32";

@@ -83,7 +83,7 @@ jobs:
 
       - name: Run Profile Refresh Account 2 (48 Cycles / Every 5 Min = 4 Hours)
         env:
-          NAUKRI_SESSION_B64: ${{ secrets.NAUKRI_SESSION_2_B64 }}
+          NAUKRI_SESSION_B64: ${{ secrets.NAUKRI_SESSION_2_B64 || secrets.NAUKRI_SESSION_2 || secrets.NAUKRI_SESSION2_B64 || secrets.NAUKRI_SESSION2 }}
           SKIP_CV_UPLOAD: "true"
           CI: true
           REFRESH_CYCLES: 48
