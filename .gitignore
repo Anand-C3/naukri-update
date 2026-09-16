@@ -8,12 +8,16 @@ apply-state-*.json
 *.png
 
 # saved browser sessions (contain logged-in cookies)
+.*-profile/
 .*-chrome-profile/
 .*-apply-profile/
+session*.txt
+storageState*.json
 
 # resume / personal docs
 *.pdf
 !Resume.pdf
+!Resume2.pdf
 
 # machine-specific launchers (contain absolute local paths)
 *.vbs

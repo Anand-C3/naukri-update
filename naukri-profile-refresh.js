@@ -38,6 +38,7 @@ const LOG_FILE = path.join(__dirname, "naukri-refresh.log");
 const ERROR_SHOT = path.join(__dirname, "naukri-refresh-error.png");
 const RESUME_PATH = resumePath; // set RESUME_FILE in .env to change which PDF is uploaded
 const LOGIN_MODE = process.argv[2] === "login";
+const SKIP_CV = process.env.SKIP_CV_UPLOAD === "true" || process.argv.includes("--skip-cv");
 // Re-upload the CV even when the profile already shows today's date — needed when
 // you swap in a different PDF, since the date check alone would skip it.
 const FORCE_CV = process.argv.includes("--force-cv");
@@ -321,8 +322,8 @@ async function googleLogin(ctx, page) {
         const dotMsg = dots >= 2 ? "dots cleared" : `dot ${dots + 1} added`;
 
         // ---- resume re-upload: only on the first cycle if needed ----
-        let cvMsg = "cv up-to-date";
-        if (cycle === 1) {
+        let cvMsg = SKIP_CV ? "cv upload skipped (headline-only mode)" : "cv up-to-date";
+        if (cycle === 1 && !SKIP_CV) {
           const pageText = async () => {
             await page
               .getByText(/Uploaded on/i)
@@ -335,34 +336,36 @@ async function googleLogin(ctx, page) {
               .catch(() => "");
           };
           if (FORCE_CV || !uploadedToday(await pageText())) {
-            if (!fs.existsSync(RESUME_PATH))
-              throw new Error(`resume file missing: ${RESUME_PATH}`);
-            await page
-              .locator('#attachCV, input[type="file"]')
-              .first()
-              .setInputFiles(RESUME_PATH);
-            await page.waitForTimeout(10000);
-            await page.goto(PROFILE_URL, {
-              waitUntil: "domcontentloaded",
-              timeout: 60000,
-            });
-            const after = await pageText();
-            const base = path.basename(RESUME_PATH);
-            const stem = path.basename(RESUME_PATH, path.extname(RESUME_PATH));
-            const nameRe = new RegExp(
-              `${stem.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(-\\d+)?\\${path.extname(RESUME_PATH)}`,
-              "i",
-            );
-            const ok = FORCE_CV ? nameRe.test(after) : uploadedToday(after);
-            if (!ok) {
-              const shown = (/Uploaded on[^\n]*/i.exec(after) || [
-                '(no "Uploaded on" text found)',
-              ])[0];
-              throw new Error(
-                `cv upload did not stick — profile shows "${shown.slice(0, 80)}"`,
+            if (!fs.existsSync(RESUME_PATH)) {
+              log(`Note: Account-specific resume file not found at ${RESUME_PATH} — skipping CV upload, headline refreshed.`);
+            } else {
+              await page
+                .locator('#attachCV, input[type="file"]')
+                .first()
+                .setInputFiles(RESUME_PATH);
+              await page.waitForTimeout(10000);
+              await page.goto(PROFILE_URL, {
+                waitUntil: "domcontentloaded",
+                timeout: 60000,
+              });
+              const after = await pageText();
+              const base = path.basename(RESUME_PATH);
+              const stem = path.basename(RESUME_PATH, path.extname(RESUME_PATH));
+              const nameRe = new RegExp(
+                `${stem.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(-\\d+)?\\${path.extname(RESUME_PATH)}`,
+                "i",
               );
+              const ok = FORCE_CV ? nameRe.test(after) : uploadedToday(after);
+              if (!ok) {
+                const shown = (/Uploaded on[^\n]*/i.exec(after) || [
+                  '(no "Uploaded on" text found)',
+                ])[0];
+                throw new Error(
+                  `cv upload did not stick — profile shows "${shown.slice(0, 80)}"`,
+                );
+              }
+              cvMsg = `cv re-uploaded (verified: ${base})`;
             }
-            cvMsg = `cv re-uploaded (verified: ${base})`;
           }
         }
 

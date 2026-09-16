@@ -20,7 +20,7 @@ function loadEnv(file) {
 }
 
 const E = loadEnv(path.join(__dirname, '.env'));
-const g = (k, d = '') => (E[k] != null && E[k] !== '' ? E[k] : (process.env[k] || d));
+const g = (k, d = '') => (process.env[k] != null && process.env[k] !== '' ? process.env[k] : (E[k] != null && E[k] !== '' ? E[k] : d));
 
 if (!process.env.CI && (!g('NAME') || !g('EMAIL'))) {
   console.warn('[config] .env missing or empty — copy .env.example to .env and fill it in.');
