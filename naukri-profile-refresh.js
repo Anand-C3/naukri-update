@@ -253,119 +253,138 @@ async function googleLogin(ctx, page) {
     const CYCLES = parseInt(process.env.REFRESH_CYCLES || (process.argv.includes("--loop") ? "50" : defaultCycles), 10);
     const DELAY_MS = 5 * 60 * 1000; // 5 minutes between updates
 
+    let consecutiveErrors = 0;
+
     for (let cycle = 1; cycle <= CYCLES; cycle++) {
-      log(`--- Refresh Cycle ${cycle} of ${CYCLES} ---`);
-      log(`Navigating to ${PROFILE_URL}...`);
-      await page.goto(PROFILE_URL, {
-        waitUntil: "domcontentloaded",
-        timeout: 60000,
-      });
-      await page.waitForTimeout(3000);
-      log(`Current URL: ${page.url()} | Title: ${await page.title()}`);
-
-      // Dismiss any promotional drawer / popup
-      await page.locator('.crossIcon, button:has-text("Later"), [class*="close-icon"], .drawer-close').first().click({ timeout: 2000 }).catch(() => {});
-
-      if (!onProfile(new URL(page.url()))) {
-        log(`Redirected to ${page.url()} — attempting login...`);
-        page = await loginNaukri(ctx, page);
-        log(`Post-login URL: ${page.url()}`);
-      }
-      // login may land on /mnjuser/homepage — make sure we're on the profile itself
-      if (!/\/mnjuser\/profile/.test(page.url())) {
+      try {
+        log(`--- Refresh Cycle ${cycle} of ${CYCLES} ---`);
+        log(`Navigating to ${PROFILE_URL}...`);
         await page.goto(PROFILE_URL, {
           waitUntil: "domcontentloaded",
           timeout: 60000,
         });
+        await page.waitForTimeout(3000);
+        log(`Current URL: ${page.url()} | Title: ${await page.title()}`);
+
+        // Dismiss any promotional drawer / popup
         await page.locator('.crossIcon, button:has-text("Later"), [class*="close-icon"], .drawer-close').first().click({ timeout: 2000 }).catch(() => {});
-      }
 
-      // Resume headline widget → pencil icon → textarea → save
-      const editIcon = page.locator(
-        '#lazyResumeHead span.edit.icon, [data-ga-track*="resumeHeadline"] .edit, .widgetHead .edit, .widgetHead a.edit, a:has-text("Edit headline"), [class*="resumeHead"] [class*="edit"]',
-      );
-      await editIcon.first().waitFor({ timeout: 30000 });
-      await editIcon.first().click();
-
-      const textarea = page.locator("#resumeHeadlineTxt");
-      await textarea.waitFor({ timeout: 15000 });
-      const current = (await textarea.inputValue()).trimEnd();
-      const dots = current.length - current.replace(/\.+$/, "").length;
-      const updated = nextHeadline(current);
-
-      await textarea.fill(updated);
-      await page
-        .getByRole("button", { name: /^save$/i })
-        .first()
-        .click();
-      await textarea.waitFor({ state: "hidden", timeout: 15000 });
-
-      // modal closing isn't proof the save stuck — reload from the server and re-read
-      await page.goto(PROFILE_URL, {
-        waitUntil: "domcontentloaded",
-        timeout: 60000,
-      });
-      await editIcon.first().waitFor({ timeout: 30000 });
-      await editIcon.first().click();
-      await textarea.waitFor({ timeout: 15000 });
-      const saved = (await textarea.inputValue()).trimEnd();
-      if (saved !== updated) {
-        throw new Error(
-          `save did not stick — server headline is "${saved.slice(0, 60)}", expected "${updated.slice(0, 60)}"`,
-        );
-      }
-
-      const dotMsg = dots >= 2 ? "dots cleared" : `dot ${dots + 1} added`;
-
-      // ---- resume re-upload: only on the first cycle if needed ----
-      let cvMsg = "cv up-to-date";
-      if (cycle === 1) {
-        const pageText = async () => {
-          await page
-            .getByText(/Uploaded on/i)
-            .first()
-            .waitFor({ timeout: 30000 })
-            .catch(() => {});
-          return page
-            .locator("body")
-            .innerText({ timeout: 30000 })
-            .catch(() => "");
-        };
-        if (FORCE_CV || !uploadedToday(await pageText())) {
-          if (!fs.existsSync(RESUME_PATH))
-            throw new Error(`resume file missing: ${RESUME_PATH}`);
-          await page
-            .locator('#attachCV, input[type="file"]')
-            .first()
-            .setInputFiles(RESUME_PATH);
-          await page.waitForTimeout(10000);
+        if (!onProfile(new URL(page.url()))) {
+          log(`Redirected to ${page.url()} — attempting login...`);
+          page = await loginNaukri(ctx, page);
+          log(`Post-login URL: ${page.url()}`);
+        }
+        // login may land on /mnjuser/homepage — make sure we're on the profile itself
+        if (!/\/mnjuser\/profile/.test(page.url())) {
           await page.goto(PROFILE_URL, {
             waitUntil: "domcontentloaded",
             timeout: 60000,
           });
-          const after = await pageText();
-          const base = path.basename(RESUME_PATH);
-          const stem = path.basename(RESUME_PATH, path.extname(RESUME_PATH));
-          const nameRe = new RegExp(
-            `${stem.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(-\\d+)?\\${path.extname(RESUME_PATH)}`,
-            "i",
+          await page.locator('.crossIcon, button:has-text("Later"), [class*="close-icon"], .drawer-close').first().click({ timeout: 2000 }).catch(() => {});
+        }
+
+        // Resume headline widget → pencil icon → textarea → save
+        const editIcon = page.locator(
+          '#lazyResumeHead span.edit.icon, [data-ga-track*="resumeHeadline"] .edit, .widgetHead .edit, .widgetHead a.edit, a:has-text("Edit headline"), [class*="resumeHead"] [class*="edit"]',
+        );
+        await editIcon.first().waitFor({ timeout: 30000 });
+        await editIcon.first().click();
+
+        const textarea = page.locator("#resumeHeadlineTxt");
+        await textarea.waitFor({ timeout: 15000 });
+        const current = (await textarea.inputValue()).trimEnd();
+        const dots = current.length - current.replace(/\.+$/, "").length;
+        const updated = nextHeadline(current);
+
+        await textarea.fill(updated);
+        await page
+          .getByRole("button", { name: /^save$/i })
+          .first()
+          .click();
+        await textarea.waitFor({ state: "hidden", timeout: 15000 });
+
+        // modal closing isn't proof the save stuck — reload from the server and re-read
+        await page.goto(PROFILE_URL, {
+          waitUntil: "domcontentloaded",
+          timeout: 60000,
+        });
+        await editIcon.first().waitFor({ timeout: 30000 });
+        await editIcon.first().click();
+        await textarea.waitFor({ timeout: 15000 });
+        const saved = (await textarea.inputValue()).trimEnd();
+        if (saved !== updated) {
+          throw new Error(
+            `save did not stick — server headline is "${saved.slice(0, 60)}", expected "${updated.slice(0, 60)}"`,
           );
-          const ok = FORCE_CV ? nameRe.test(after) : uploadedToday(after);
-          if (!ok) {
-            const shown = (/Uploaded on[^\n]*/i.exec(after) || [
-              '(no "Uploaded on" text found)',
-            ])[0];
-            throw new Error(
-              `cv upload did not stick — profile shows "${shown.slice(0, 80)}"`,
+        }
+
+        const dotMsg = dots >= 2 ? "dots cleared" : `dot ${dots + 1} added`;
+
+        // ---- resume re-upload: only on the first cycle if needed ----
+        let cvMsg = "cv up-to-date";
+        if (cycle === 1) {
+          const pageText = async () => {
+            await page
+              .getByText(/Uploaded on/i)
+              .first()
+              .waitFor({ timeout: 30000 })
+              .catch(() => {});
+            return page
+              .locator("body")
+              .innerText({ timeout: 30000 })
+              .catch(() => "");
+          };
+          if (FORCE_CV || !uploadedToday(await pageText())) {
+            if (!fs.existsSync(RESUME_PATH))
+              throw new Error(`resume file missing: ${RESUME_PATH}`);
+            await page
+              .locator('#attachCV, input[type="file"]')
+              .first()
+              .setInputFiles(RESUME_PATH);
+            await page.waitForTimeout(10000);
+            await page.goto(PROFILE_URL, {
+              waitUntil: "domcontentloaded",
+              timeout: 60000,
+            });
+            const after = await pageText();
+            const base = path.basename(RESUME_PATH);
+            const stem = path.basename(RESUME_PATH, path.extname(RESUME_PATH));
+            const nameRe = new RegExp(
+              `${stem.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(-\\d+)?\\${path.extname(RESUME_PATH)}`,
+              "i",
             );
+            const ok = FORCE_CV ? nameRe.test(after) : uploadedToday(after);
+            if (!ok) {
+              const shown = (/Uploaded on[^\n]*/i.exec(after) || [
+                '(no "Uploaded on" text found)',
+              ])[0];
+              throw new Error(
+                `cv upload did not stick — profile shows "${shown.slice(0, 80)}"`,
+              );
+            }
+            cvMsg = `cv re-uploaded (verified: ${base})`;
           }
-          cvMsg = `cv re-uploaded (verified: ${base})`;
+        }
+
+        consecutiveErrors = 0;
+        log(
+          `OK [Cycle ${cycle}/${CYCLES}]: headline ${dotMsg} (verified), ${cvMsg} → "${updated.slice(0, 60)}"`,
+        );
+      } catch (cycleErr) {
+        consecutiveErrors++;
+        log(`Cycle ${cycle} warning: ${cycleErr.message.split("\n")[0]}`);
+        const pages = ctx.pages();
+        for (let i = 0; i < pages.length; i++) {
+          await pages[i]
+            .screenshot({ path: ERROR_SHOT.replace(".png", `-${cycle}-${i}.png`) })
+            .catch(() => {});
+        }
+        if (consecutiveErrors >= 5) {
+          log("ERROR: 5 consecutive failures occurred, ending run.");
+          process.exitCode = 1;
+          break;
         }
       }
-
-      log(
-        `OK [Cycle ${cycle}/${CYCLES}]: headline ${dotMsg} (verified), ${cvMsg} → "${updated.slice(0, 60)}"`,
-      );
 
       if (cycle < CYCLES) {
         log(`Waiting 5 minutes before next refresh cycle...`);
@@ -373,15 +392,8 @@ async function googleLogin(ctx, page) {
       }
     }
   } catch (err) {
-    const pages = ctx.pages();
-    for (let i = 0; i < pages.length; i++) {
-      await pages[i]
-        .screenshot({ path: ERROR_SHOT.replace(".png", `-${i}.png`) })
-        .catch(() => {});
-    }
-    log(
-      `ERROR: ${err.message.split("\n")[0]} (screenshots: naukri-refresh-error-*.png)`,
-    );
+    process.exitCode = 1;
+    log(`ERROR: ${err.message.split("\n")[0]}`);
   } finally {
     await ctx.close().catch(() => {});
     if (browser) await browser.close().catch(() => {});
