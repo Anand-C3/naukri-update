@@ -249,9 +249,9 @@ async function googleLogin(ctx, page) {
   let page = ctx.pages()[0] || (await ctx.newPage());
 
   try {
-    const defaultCycles = isCI ? 150 : 1;
-    const CYCLES = parseInt(process.env.REFRESH_CYCLES || (process.argv.includes("--loop") ? "150" : defaultCycles), 10);
-    const DELAY_MS = 2 * 60 * 1000; // 2 minutes between updates
+    const defaultCycles = isCI ? 50 : 1;
+    const CYCLES = parseInt(process.env.REFRESH_CYCLES || (process.argv.includes("--loop") ? "50" : defaultCycles), 10);
+    const DELAY_MS = 5 * 60 * 1000; // 5 minutes between updates
 
     for (let cycle = 1; cycle <= CYCLES; cycle++) {
       log(`--- Refresh Cycle ${cycle} of ${CYCLES} ---`);
@@ -368,7 +368,7 @@ async function googleLogin(ctx, page) {
       );
 
       if (cycle < CYCLES) {
-        log(`Waiting 2 minutes before next refresh cycle...`);
+        log(`Waiting 5 minutes before next refresh cycle...`);
         await page.waitForTimeout(DELAY_MS);
       }
     }
