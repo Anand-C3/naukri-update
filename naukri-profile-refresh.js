@@ -55,6 +55,22 @@ const log = (msg) => {
 
 const onProfile = (url) => url.pathname && url.pathname.startsWith("/mnjuser");
 
+async function gotoWithRetry(page, url, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await page.goto(url, {
+        waitUntil: "domcontentloaded",
+        timeout: 60000,
+      });
+      return;
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      log(`Navigation retry ${i + 1}/${retries} after error: ${err.message}`);
+      await page.waitForTimeout(3000);
+    }
+  }
+}
+
 async function loginNaukri(ctx, page) {
   log("Session expired/unauthorized — logging in to Naukri...");
   await page.goto(LOGIN_URL, {
@@ -218,9 +234,13 @@ async function googleLogin(ctx, page) {
     viewport: { width: 1280, height: 850 },
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
     args: [
+      "--disable-http2",
       "--disable-blink-features=AutomationControlled",
       "--no-sandbox",
       "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--no-first-run",
       isCI || SHOW_WINDOW || MINIMIZE_ONLY || LOGIN_MODE
         ? "--window-position=0,0"
         : "--window-position=-32000,-32000",
@@ -279,10 +299,7 @@ async function googleLogin(ctx, page) {
       try {
         log(`--- Refresh Cycle ${cycle} of ${CYCLES} ---`);
         log(`Navigating to ${PROFILE_URL}...`);
-        await page.goto(PROFILE_URL, {
-          waitUntil: "domcontentloaded",
-          timeout: 60000,
-        });
+        await gotoWithRetry(page, PROFILE_URL);
         await page.waitForTimeout(3000);
         log(`Current URL: ${page.url()} | Title: ${await page.title()}`);
 
@@ -296,10 +313,7 @@ async function googleLogin(ctx, page) {
         }
         // login may land on /mnjuser/homepage — make sure we're on the profile itself
         if (!/\/mnjuser\/profile/.test(page.url())) {
-          await page.goto(PROFILE_URL, {
-            waitUntil: "domcontentloaded",
-            timeout: 60000,
-          });
+          await gotoWithRetry(page, PROFILE_URL);
           await page.locator('.crossIcon, button:has-text("Later"), [class*="close-icon"], .drawer-close').first().click({ timeout: 2000 }).catch(() => {});
         }
 
@@ -324,10 +338,7 @@ async function googleLogin(ctx, page) {
         await textarea.waitFor({ state: "hidden", timeout: 15000 });
 
         // modal closing isn't proof the save stuck — reload from the server and re-read
-        await page.goto(PROFILE_URL, {
-          waitUntil: "domcontentloaded",
-          timeout: 60000,
-        });
+        await gotoWithRetry(page, PROFILE_URL);
         await editIcon.first().waitFor({ timeout: 30000 });
         await editIcon.first().click();
         await textarea.waitFor({ timeout: 15000 });
