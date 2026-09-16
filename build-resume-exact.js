@@ -9,7 +9,7 @@ const htmlContent = `<!DOCTYPE html>
 <style>
   @page {
     size: letter;
-    margin: 18mm 18mm 18mm 18mm;
+    margin: 12mm 14mm 12mm 14mm;
   }
   * {
     box-sizing: border-box;
@@ -19,34 +19,34 @@ const htmlContent = `<!DOCTYPE html>
   body {
     font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
     color: #111827;
-    line-height: 1.38;
-    font-size: 10pt;
+    line-height: 1.32;
+    font-size: 9.8pt;
     background: #fff;
   }
   .header {
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .name {
-    font-size: 19pt;
+    font-size: 18.5pt;
     font-weight: 700;
     color: #1e3a8a;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
   }
   .headline {
-    font-size: 11pt;
+    font-size: 10.8pt;
+    color: #374151;
+    margin-bottom: 2px;
+  }
+  .contact {
+    font-size: 9.2pt;
     color: #374151;
     margin-bottom: 3px;
   }
-  .contact {
-    font-size: 9.5pt;
-    color: #374151;
-    margin-bottom: 4px;
-  }
   .links {
-    font-size: 9.5pt;
+    font-size: 9.2pt;
   }
   .links a {
     color: #1d4ed8;
@@ -54,7 +54,7 @@ const htmlContent = `<!DOCTYPE html>
     margin: 0 6px;
   }
   .section {
-    margin-top: 14px;
+    margin-top: 10px;
   }
   .section-title {
     font-size: 10.5pt;
