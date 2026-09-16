@@ -179,17 +179,32 @@ async function googleLogin(ctx, page) {
   if (process.env.NAUKRI_SESSION_B64) {
     try {
       const zlib = require("zlib");
-      const raw = process.env.NAUKRI_SESSION_B64.trim();
+      const raw = process.env.NAUKRI_SESSION_B64.trim().replace(/^["']|["']$/g, "").replace(/\s+/g, "");
       log(`NAUKRI_SESSION_B64 received (length: ${raw.length}). Decoding...`);
       const buf = Buffer.from(raw, "base64");
-      let jsonStr;
-      try {
-        jsonStr = zlib.gunzipSync(buf).toString("utf8");
-      } catch {
-        jsonStr = buf.toString("utf8");
+      let jsonStr = null;
+      const decoders = [
+        () => zlib.gunzipSync(buf).toString("utf8"),
+        () => zlib.inflateSync(buf).toString("utf8"),
+        () => zlib.unzipSync(buf).toString("utf8"),
+        () => buf.toString("utf8"),
+      ];
+
+      for (const decodeFn of decoders) {
+        try {
+          const candidate = decodeFn();
+          JSON.parse(candidate); // strictly validate JSON
+          jsonStr = candidate;
+          break;
+        } catch {}
       }
-      fs.writeFileSync(path.join(__dirname, "storageState.json"), jsonStr, "utf8");
-      log("Successfully loaded and saved storageState.json from NAUKRI_SESSION_B64.");
+
+      if (jsonStr) {
+        fs.writeFileSync(path.join(__dirname, "storageState.json"), jsonStr, "utf8");
+        log("Successfully loaded and validated storageState.json from NAUKRI_SESSION_B64.");
+      } else {
+        log("Error: Could not decode NAUKRI_SESSION_B64 into valid JSON.");
+      }
     } catch (e) {
       log(`Warning: Failed to decode NAUKRI_SESSION_B64: ${e.message}`);
     }
