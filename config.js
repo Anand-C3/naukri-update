@@ -22,7 +22,7 @@ function loadEnv(file) {
 const E = loadEnv(path.join(__dirname, '.env'));
 const g = (k, d = '') => (E[k] != null && E[k] !== '' ? E[k] : (process.env[k] || d));
 
-if (!g('NAME') || !g('EMAIL')) {
+if (!process.env.CI && (!g('NAME') || !g('EMAIL'))) {
   console.warn('[config] .env missing or empty — copy .env.example to .env and fill it in.');
 }
 
@@ -63,6 +63,6 @@ const geminiKey = g('GEMINI_KEY');
 const naukriProfileUrl = g('NAUKRI_PROFILE_URL', 'https://www.naukri.com/mnjuser/profile');
 // The PDF uploaded to the Naukri profile and attached to external application forms.
 // Relative names resolve against the repo folder; an absolute path is used as-is.
-const resumePath = path.resolve(__dirname, g('RESUME_FILE', 'Ankit Baghel.pdf'));
+const resumePath = path.resolve(__dirname, g('RESUME_FILE', 'Resume.pdf'));
 
 module.exports = { CV, CREDS, geminiKey, naukriProfileUrl, resumePath };
