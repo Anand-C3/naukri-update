@@ -38,7 +38,7 @@ const LOG_FILE = path.join(__dirname, "naukri-refresh.log");
 const ERROR_SHOT = path.join(__dirname, "naukri-refresh-error.png");
 const RESUME_PATH = resumePath; // set RESUME_FILE in .env to change which PDF is uploaded
 const LOGIN_MODE = process.argv[2] === "login";
-const SKIP_CV = process.env.SKIP_CV_UPLOAD === "true" || process.argv.includes("--skip-cv");
+const SKIP_CV = true; // Headline-only mode: do not touch or re-upload resume
 // Re-upload the CV even when the profile already shows today's date — needed when
 // you swap in a different PDF, since the date check alone would skip it.
 const FORCE_CV = process.argv.includes("--force-cv");
