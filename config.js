@@ -35,7 +35,7 @@ const CV = {
   company: g('COMPANY') || (g('CURRENT_ROLE').split(' at ')[1] || '').split(' (')[0],
   education: g('EDUCATION'),
   yearsOfExperience: g('YEARS_EXPERIENCE'),
-  yearsNumber: (g('YEARS_EXPERIENCE').match(/\d+/) || ['1'])[0], // numeric-only chatbot fields
+  yearsNumber: (g('YEARS_EXPERIENCE').match(/\d+(\.\d+)?/) || ['1'])[0], // numeric-only chatbot fields
   skills: g('SKILLS'),
   highlights: g('HIGHLIGHTS').split('||').map((s) => s.trim()).filter(Boolean),
   // application answers

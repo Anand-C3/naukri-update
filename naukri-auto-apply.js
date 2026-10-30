@@ -85,7 +85,8 @@
     [/notice period|when can you (start|join)|start date|joining|how soon/i, CV.noticePeriod],
     [/current .{0,15}(ctc|salary|compensation|annual)/i, CV.currentCTC],          // bare lakhs number
     [/(expected|desired) .{0,15}(ctc|salary|compensation|pay)|salary expectation/i, CV.expectedCTC], // bare lakhs
-    [/years? of (work |professional |total |relevant )?experience|how (long|many years)|total experience|relevant experience/i, CV.yearsNumber || '1'],
+    [/years? of (work |professional |total |relevant )?experience|how (long|many years)|total experience|relevant experience/i, CV.yearsNumber || '2.5'],
+    [/(are you|willing|open|comfortable).{0,25}(relocat|move|remote|work from office|wfh|hybrid)/i, 'Yes'],
     [/remote|work from home|wfh/i, CV.remoteOk],
     [/reloc|move to|shift to|based out of|work from (our )?office|commute|on-?site/i, CV.relocate],
     [/e-?mail/i, CV.email], // before location — "Email address" must not match /address/
