@@ -47,6 +47,8 @@ const ACTIVE_UNTIL = 23; // 23:00 (exclusive)
 // `node show-windows.js` brings a hidden window back.
 const SHOW_WINDOW = process.argv.includes('--show');
 const MINIMIZE_ONLY = process.argv.includes('--minimize');
+const LOOP_MODE = process.argv.includes('--loop') || process.argv.includes('--hourly');
+const HOURLY_INTERVAL_MS = 60 * 60 * 1000;
 
 const SITES = {
   indeed: {
@@ -93,13 +95,13 @@ const SITES = {
     script: 'naukri-auto-apply.js',
     profile: '.naukri-apply-profile',
     searches: [
-      'https://www.naukri.com/generative-ai-engineer-jobs?experience=2',
-      'https://www.naukri.com/ai-engineer-jobs?experience=2',
-      'https://www.naukri.com/llm-engineer-jobs?experience=2',
-      'https://www.naukri.com/copilot-studio-jobs?experience=2',
-      'https://www.naukri.com/python-developer-jobs?experience=2',
-      'https://www.naukri.com/full-stack-developer-jobs?experience=2',
-      'https://www.naukri.com/software-developer-jobs?experience=2',
+      'https://www.naukri.com/generative-ai-engineer-jobs?experience=2&jobAge=1&sort=date',
+      'https://www.naukri.com/ai-engineer-jobs?experience=2&jobAge=1&sort=date',
+      'https://www.naukri.com/llm-engineer-jobs?experience=2&jobAge=1&sort=date',
+      'https://www.naukri.com/copilot-studio-jobs?experience=2&jobAge=1&sort=date',
+      'https://www.naukri.com/python-developer-jobs?experience=2&jobAge=1&sort=date',
+      'https://www.naukri.com/full-stack-developer-jobs?experience=2&jobAge=1&sort=date',
+      'https://www.naukri.com/software-developer-jobs?experience=2&jobAge=1&sort=date',
     ],
     loginUrl: 'https://www.naukri.com/nlogin/login',
     // inject only on search pages (…-jobs…), never into the job popup the script drives itself
@@ -116,7 +118,7 @@ const SITES = {
 
 const site = SITES[SITE_ARG];
 if (!site) {
-  console.log('Usage: node auto-apply-runner.js <indeed|wellfound|naukri> [login|--live] [--show|--minimize] [--scheduled]');
+  console.log('Usage: node auto-apply-runner.js <indeed|wellfound|naukri> [login|--live] [--show|--minimize] [--loop] [--scheduled]');
   process.exit(1);
 }
 
@@ -253,18 +255,34 @@ function buildInjection() {
     return;
   }
 
-  log(`Starting. mode=${LIVE ? 'LIVE' : 'DRY RUN'} target=${TARGET} applications, max ${MAX_RUNTIME_MS / 60000} min`);
-  const deadline = Date.now() + MAX_RUNTIME_MS;
-  let submitted = 0;
-  let lastActivity = Date.now();
-  let searchIdx = 0;
-  let pendingJob = null; // details of the job currently being applied to, for the CSV
-  const externalQueue = [];              // "Apply on company site" jobs, handled in Node
-  // Tabs opened purely to read the site's applied-list. They are on the same origin as
-  // the feed, so without this the supervisor would inject the apply script into them.
-  const VERIFY_PAGES = new Set();
-  const externalSeen = new Set();
-  const extStats = { applied: 0, skipped: 0, failed: 0 };
+  let roundNum = 0;
+  do {
+    roundNum++;
+    const currentToday = new Date().toDateString();
+    if (dayState.date !== currentToday) {
+      dayState = { date: currentToday, count: 0 };
+    }
+    const currentTarget = Math.min(site.perRun || DAILY_CAP, DAILY_CAP - dayState.count);
+    if (!LOGIN_MODE && currentTarget <= 0) {
+      log(`Daily cap of ${DAILY_CAP} applications already reached (${dayState.count} today).`);
+      if (LOOP_MODE) {
+        log('Hourly loop: daily cap reached. Waiting 60 minutes before re-checking...');
+        await new Promise((r) => setTimeout(r, HOURLY_INTERVAL_MS));
+        continue;
+      }
+      return;
+    }
+
+    log(`=== [Round ${roundNum}] Starting. mode=${LIVE ? 'LIVE' : 'DRY RUN'} target=${currentTarget} applications, max ${MAX_RUNTIME_MS / 60000} min ===`);
+    const deadline = Date.now() + MAX_RUNTIME_MS;
+    let submitted = 0;
+    let lastActivity = Date.now();
+    let searchIdx = 0;
+    let pendingJob = null;
+    const externalQueue = [];
+    const VERIFY_PAGES = new Set();
+    const externalSeen = new Set();
+    const extStats = { applied: 0, skipped: 0, failed: 0 };
 
   const isBusy = (p) => p.evaluate('!!window.__aaBusy').catch(() => false);
 
@@ -587,9 +605,16 @@ function buildInjection() {
     await new Promise((r) => setTimeout(r, 15000)); // let the profile lock clear before relaunching
   }
 
-  log(`Finished: ${submitted}/${TARGET} applications ${LIVE ? 'submitted' : 'simulated (dry run)'}.`);
-  if (site.externalApply) {
-    log(`External (company site): ${extStats.applied} applied, ${extStats.skipped} skipped (account required / not a form), ` +
-        `${extStats.failed} failed, ${externalQueue.length} left in queue.`);
-  }
+  log(`Finished round ${roundNum}: ${submitted}/${currentTarget} applications ${LIVE ? 'submitted' : 'simulated (dry run)'}.`);
+    if (site.externalApply) {
+      log(`External (company site): ${extStats.applied} applied, ${extStats.skipped} skipped (account required / not a form), ` +
+          `${extStats.failed} failed, ${externalQueue.length} left in queue.`);
+    }
+
+    if (LOOP_MODE) {
+      const nextTime = new Date(Date.now() + HOURLY_INTERVAL_MS).toLocaleTimeString();
+      log(`⏳ Hourly loop active: round complete. Waiting 60 minutes for newly posted jobs. Next round at ${nextTime}...\n`);
+      await new Promise((r) => setTimeout(r, HOURLY_INTERVAL_MS));
+    }
+  } while (LOOP_MODE);
 })().catch((e) => { log('FATAL: ' + e.message.split('\n')[0]); process.exit(1); });

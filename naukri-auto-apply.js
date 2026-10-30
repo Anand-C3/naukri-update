@@ -40,6 +40,7 @@
     DRY_RUN: true,             // true = open jobs + locate Apply but never click it. Flip to false when ready.
     MAX_APPLICATIONS: 15,      // stop after this many applications this run (tracked across pastes)
     EXTERNAL_BATCH: 4,         // queue this many "apply on company site" jobs, then yield to the runner
+    MAX_POST_HOURS: 6,         // only apply to jobs posted within the last 6 hours
     // Wait between applications, randomised between min/max. Raised from 8-20s: an
     // hourly run only needs ~10 applications, so there is a whole hour to spread them
     // over, and a steady application every 10s is a far stronger automation signal
@@ -216,6 +217,30 @@
     return CONFIG.TITLE_KEYWORDS.some((k) => lower.includes(k)) &&
            !CONFIG.TITLE_BLOCKLIST.some((k) => lower.includes(k));
   };
+
+
+  function isPostedWithinHours(text, maxHours = 6) {
+    if (!text) return true;
+    const t = text.trim().toLowerCase();
+    if (/just now|moments? ago|few hours? ago|less than/i.test(t)) return true;
+    if (/(\d+)\s*(?:minute|min|m)s?\s*ago/i.test(t)) return true;
+    const hrMatch = t.match(/(\d+)\s*(?:hour|hr|h)s?\s*ago/i);
+    if (hrMatch) return parseInt(hrMatch[1], 10) <= maxHours;
+    return false;
+  }
+
+  function getCardPostedText(card) {
+    const el = card.querySelector('span.job-post-day, [class*="job-post-day" i], [class*="posted-by" i], [class*="date" i]');
+    if (el && el.textContent.trim()) return el.textContent.trim();
+    const spans = card.querySelectorAll('span, div, p');
+    for (const s of spans) {
+      const txt = s.textContent.trim();
+      if (/ago|just now|moments? ago/i.test(txt) && txt.length < 35) {
+        return txt;
+      }
+    }
+    return '';
+  }
 
   // ======================= CHATBOT QUESTIONNAIRE (inside popup) =======================
   async function handleChatbot(doc) {
@@ -400,14 +425,22 @@
     const cards = [...document.querySelectorAll(SELECTORS.jobCards)].filter(visible);
     let job = null;
 
-    let nSeen = 0, nFiltered = 0;
+    let nSeen = 0, nFiltered = 0, nTooOld = 0;
     for (const card of cards) {
       const link = card.querySelector(SELECTORS.jobTitleLink);
       if (!link) continue;
       const title = link.textContent.replace(/\s+/g, ' ').trim();
       if (state[SEEN_KEY].includes(link.href)) { nSeen++; continue; }
       if (!titleOk(title)) { nFiltered++; continue; }
-      job = { href: link.href, title, card };
+
+      // Skip jobs posted more than MAX_POST_HOURS ago
+      const postedText = getCardPostedText(card);
+      if (postedText && !isPostedWithinHours(postedText, CONFIG.MAX_POST_HOURS)) {
+        nTooOld++;
+        continue;
+      }
+
+      job = { href: link.href, title, card, postedText };
       break;
     }
 
@@ -417,7 +450,7 @@
       // Split the two very different reasons for "nothing to do here": jobs already
       // visited on an earlier run vs jobs the title filter rejected. Reporting a
       // combined "0 match" made an exhausted page look like a broken filter.
-      log(`(this page: ${cards.length} cards — ${nSeen} already seen, ${nFiltered} filtered out; sample: ${sample})`);
+      log(`(this page: ${cards.length} cards — ${nSeen} already seen, ${nFiltered} filtered out, ${nTooOld} older than ${CONFIG.MAX_POST_HOURS}h; sample: ${sample})`);
       const nextBtn = findButtonByText(document, SELECTORS.nextPageText);
       if (nextBtn) {
         log('🌐 Next results page — the page will reload. PASTE THE SCRIPT AGAIN when it loads.');
