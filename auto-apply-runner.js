@@ -502,7 +502,29 @@ function buildInjection() {
   ctx.pages().forEach(wire);
   ctx.on('page', wire);
 
+  const ensureSortByDate = async (p) => {
+    if (SITE_ARG !== 'naukri') return;
+    try {
+      const sortBtn = await p.waitForSelector('button.styles_sort-droop-label__TxC3K, button[class*="sort-droop" i], button[class*="sort" i]', { timeout: 6000 }).catch(() => null);
+      if (sortBtn) {
+        const text = await sortBtn.innerText().catch(() => '');
+        if (/relevance/i.test(text)) {
+          log('  Sorting by Date (newest first)...');
+          await sortBtn.click().catch(() => {});
+          await p.waitForTimeout(800);
+          const clicked = await p.evaluate(() => {
+            const opt = [...document.querySelectorAll('a, span, li, [role="option"]')].find((e) => e.textContent.trim() === 'Date');
+            if (opt) { opt.click(); return true; }
+            return false;
+          }).catch(() => false);
+          if (clicked) await p.waitForTimeout(3000);
+        }
+      }
+    } catch (e) {}
+  };
+
   await mainPage.goto(site.searches[0], { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await ensureSortByDate(mainPage);
   // not logged in? every flow needs a session — bail with a clear message
   await mainPage.waitForTimeout(8000);
   const bodyText = await mainPage.evaluate('document.body.innerText.slice(0, 3000)').catch(() => '');
@@ -562,6 +584,7 @@ function buildInjection() {
         if (searchIdx >= site.searches.length) { log('All searches exhausted for this round.'); break; }
         log(`Rotating to next search (${searchIdx + 1}/${site.searches.length}): ${site.searches[searchIdx]}`);
         await mainPage.goto(site.searches[searchIdx], { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
+        await ensureSortByDate(mainPage);
         await mainPage.evaluate('window.__searchDone = false').catch(() => {});
       } else {
         // Re-injecting forever in a wedged browser looks like progress but isn't:

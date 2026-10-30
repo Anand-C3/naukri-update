@@ -222,7 +222,7 @@
   function isPostedWithinHours(text, maxHours = 6) {
     if (!text) return true;
     const t = text.trim().toLowerCase();
-    if (/just now|moments? ago|few hours? ago|less than/i.test(t)) return true;
+    if (/just now|moments? ago|few hours? ago|today|less than/i.test(t)) return true;
     if (/(\d+)\s*(?:minute|min|m)s?\s*ago/i.test(t)) return true;
     const hrMatch = t.match(/(\d+)\s*(?:hour|hr|h)s?\s*ago/i);
     if (hrMatch) return parseInt(hrMatch[1], 10) <= maxHours;
@@ -432,11 +432,13 @@
     /* continue with default sort if sorting fails */
   }
 
-  const popup = window.open('about:blank', 'naukriApplyPopup', 'width=1250,height=900');
-  if (!popup) {
-    log('🚫 POPUP BLOCKED. Allow popups for naukri.com (address-bar icon → Always allow), then paste again.');
-    return;
-  }
+  let popup = null;
+  const getPopup = () => {
+    if (!popup || popup.closed) {
+      popup = window.open('about:blank', 'naukriApplyPopup', 'width=1250,height=900');
+    }
+    return popup;
+  };
 
   let extQueued = 0;
   while (state.applied < CONFIG.MAX_APPLICATIONS) {
@@ -490,7 +492,7 @@
     log(`▶ Applying: ${job.title} | ${job.href}`);
     job.card.scrollIntoView({ block: 'center' });
 
-    const ok = await applyInPopup(popup, job);
+    const ok = await applyInPopup(getPopup(), job);
     // Strictly true: 'external' is truthy and must not be counted as an application.
     if (ok === true && !CONFIG.DRY_RUN) {
       state.applied++;
@@ -513,7 +515,7 @@
     await humanDelay();
   }
 
-  popup.close();
+  if (popup && !popup.closed) popup.close();
   window.__searchDone = true;
   log(CONFIG.DRY_RUN
     ? 'DRY RUN finished — nothing was actually sent. Set CONFIG.DRY_RUN = false and re-paste to apply for real.'
