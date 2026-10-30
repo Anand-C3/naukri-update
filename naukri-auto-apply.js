@@ -469,14 +469,19 @@
       // visited on an earlier run vs jobs the title filter rejected. Reporting a
       // combined "0 match" made an exhausted page look like a broken filter.
       log(`(this page: ${cards.length} cards — ${nSeen} already seen, ${nFiltered} filtered out, ${nTooOld} older than ${CONFIG.MAX_POST_HOURS}h; sample: ${sample})`);
+      if (nTooOld > 0 && (nSeen + nFiltered + nTooOld >= cards.length)) {
+        log(`(all remaining jobs on this page are older than ${CONFIG.MAX_POST_HOURS}h — search exhausted for this round)`);
+        break;
+      }
       const nextBtn = findButtonByText(document, SELECTORS.nextPageText);
       if (nextBtn) {
-        log('🌐 Next results page — the page will reload. PASTE THE SCRIPT AGAIN when it loads.');
-        popup.close();
+        log('🌐 Navigating to next results page...');
         nextBtn.click();
-        return;
+        await sleep(3500);
+        await waitForCards(20000);
+        continue;
       }
-      log('No more pages. Change your search and paste again.');
+      log('No more pages. Moving to next search query.');
       break;
     }
 
@@ -509,6 +514,7 @@
   }
 
   popup.close();
+  window.__searchDone = true;
   log(CONFIG.DRY_RUN
     ? 'DRY RUN finished — nothing was actually sent. Set CONFIG.DRY_RUN = false and re-paste to apply for real.'
     : `Finished. Applied to ${state.applied} jobs total. Clear localStorage["${STORE_KEY}"] to reset the counter.`);

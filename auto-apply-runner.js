@@ -556,11 +556,13 @@ function buildInjection() {
     }
 
     if (!anyBusy) {
-      if (Date.now() - lastActivity > IDLE_ROTATE_MS) {
+      const searchDone = await mainPage.evaluate('!!window.__searchDone').catch(() => false);
+      if (Date.now() - lastActivity > IDLE_ROTATE_MS || searchDone) {
         searchIdx++;
-        if (searchIdx >= site.searches.length) { log('All searches exhausted for today.'); break; }
-        log(`Rotating to next search: ${site.searches[searchIdx]}`);
+        if (searchIdx >= site.searches.length) { log('All searches exhausted for this round.'); break; }
+        log(`Rotating to next search (${searchIdx + 1}/${site.searches.length}): ${site.searches[searchIdx]}`);
         await mainPage.goto(site.searches[searchIdx], { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
+        await mainPage.evaluate('window.__searchDone = false').catch(() => {});
       } else {
         // Re-injecting forever in a wedged browser looks like progress but isn't:
         // a bot-check, a dead SPA or a stale session produce the same "script ran,
