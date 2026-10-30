@@ -414,6 +414,24 @@
     return;
   }
 
+  // Ensure results are sorted by Date (newest first)
+  try {
+    const sortBtn = document.querySelector('button.styles_sort-droop-label__TxC3K') ||
+                    [...document.querySelectorAll('button')].find(b => /relevance/i.test(b.textContent));
+    if (sortBtn && /relevance/i.test(sortBtn.textContent)) {
+      log('Sorting search results by Date (newest first)...');
+      sortBtn.click();
+      await sleep(600);
+      const dateOption = [...document.querySelectorAll('a, span, li, [role="option"]')].find(e => e.textContent.trim() === 'Date');
+      if (dateOption) {
+        dateOption.click();
+        await sleep(2500);
+      }
+    }
+  } catch (e) {
+    /* continue with default sort if sorting fails */
+  }
+
   const popup = window.open('about:blank', 'naukriApplyPopup', 'width=1250,height=900');
   if (!popup) {
     log('🚫 POPUP BLOCKED. Allow popups for naukri.com (address-bar icon → Always allow), then paste again.');
