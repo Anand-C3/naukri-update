@@ -46,7 +46,7 @@ jobs:
           CI: true
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          SCHEDULE_SLOTS: "08:30,10:00,11:30,13:00,14:30,16:00,17:30"
+          SCHEDULE_SLOTS: "08:30,09:15,10:00,10:45,11:30,12:15,13:00,13:45,14:30,15:15,16:00,16:45,17:30,18:15"
           SINGLE_RUN: ${{ inputs.mode == 'single' }}
         run: |
           xvfb-run --auto-servernum --server-args="-screen 0 1280x900x24" node run-cloud-schedule.js

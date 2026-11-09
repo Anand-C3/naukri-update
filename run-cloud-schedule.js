@@ -6,12 +6,12 @@
 
 const { spawnSync } = require("child_process");
 
-const SLOTS = (process.env.SCHEDULE_SLOTS || "08:30,10:00,11:30,13:00,14:30,16:00,17:30")
+const SLOTS = (process.env.SCHEDULE_SLOTS || "08:30,09:15,10:00,10:45,11:30,12:15,13:00,13:45,14:30,15:15,16:00,16:45,17:30,18:15")
   .split(",")
   .map(s => s.trim())
   .filter(Boolean);
 
-const MAX_CYCLES_PER_JOB = 4; // Max 4 cycles per job (4 * 90 min = 6 hours max limit)
+const MAX_CYCLES_PER_JOB = 5; // Max 5 cycles per job (5 * 45 min = 3.75 hours, safely below 6h limit)
 
 function log(msg) {
   const istTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
