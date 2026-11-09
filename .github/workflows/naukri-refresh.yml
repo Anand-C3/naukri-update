@@ -2,15 +2,14 @@ name: Scheduled Naukri Profile Refresh
 
 on:
   schedule:
-    # 8:30 AM, 10:00 AM, 11:30 AM, 1:00 PM, 2:30 PM, 4:00 PM, 5:30 PM IST (UTC+5:30) - Monday to Friday only (45-min alternating with Account 2)
-    - cron: '0 3 * * 1-5'   # 08:30 AM IST, Mon-Fri
-    - cron: '30 4 * * 1-5'  # 10:00 AM IST, Mon-Fri
-    - cron: '0 6 * * 1-5'   # 11:30 AM IST, Mon-Fri
-    - cron: '30 7 * * 1-5'  # 01:00 PM IST, Mon-Fri
-    - cron: '0 9 * * 1-5'   # 02:30 PM IST, Mon-Fri
-    - cron: '30 10 * * 1-5' # 04:00 PM IST, Mon-Fri
-    - cron: '0 12 * * 1-5'  # 05:30 PM IST, Mon-Fri
-  workflow_dispatch: # Allows manual trigger from GitHub web UI
+    # Morning wake-up watchdog (triggers between 7:30 AM and 8:15 AM IST)
+    - cron: '17 2 * * 1-5'  # 07:47 AM IST, Mon-Fri (awkward non-congested minute)
+  workflow_dispatch: # Allows manual trigger from GitHub web UI / chaining
+    inputs:
+      mode:
+        description: 'Run mode: session (full scheduled day) or single (1 immediate cycle)'
+        required: false
+        default: 'session'
 
 concurrency:
   group: naukri-refresh
@@ -20,7 +19,7 @@ jobs:
   refresh:
     name: Scheduled Naukri Profile Refresher
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 350
     permissions:
       actions: write
       contents: read
@@ -40,14 +39,17 @@ jobs:
           npm install
           npx --yes playwright-core install --with-deps chromium
 
-      - name: Run Profile Refresh (1 Cycle - Headline Only)
+      - name: Run Cloud Profile Refresh Session
         env:
           NAUKRI_SESSION_B64: ${{ secrets.NAUKRI_SESSION_B64 }}
           SKIP_CV_UPLOAD: "true"
           CI: true
-          REFRESH_CYCLES: 1
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SCHEDULE_SLOTS: "08:30,10:00,11:30,13:00,14:30,16:00,17:30"
+          SINGLE_RUN: ${{ inputs.mode == 'single' }}
         run: |
-          xvfb-run --auto-servernum --server-args="-screen 0 1280x900x24" node naukri-profile-refresh.js
+          xvfb-run --auto-servernum --server-args="-screen 0 1280x900x24" node run-cloud-schedule.js
 
       - name: Upload Screenshot on Failure
         if: always()
